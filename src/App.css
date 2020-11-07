@@ -12,12 +12,22 @@
   background-color: white;
   padding: 10px;
   border-bottom:1px solid lightgray;
-  object-fit: contain;
+
+}
+.header{
+  width: 90%;
+  max-width: 1090px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  object-fit: contain;
 }
 .app__headerImage{
   object-fit: contain;
+}
+.app__signParent{
+  width: 80%;
+  max-width: 400px;
 }
 .app__signInput{
   margin: 10px 0;
@@ -29,13 +39,4 @@
 .app__posts{
   display: flex;
   justify-content: center;
-}
-.app__postsRight{
-  margin-left: 20px;
-}
-
-@media screen and (max-width:550px){
- .app__postsRight{
-   margin: 0;
- }   
 }

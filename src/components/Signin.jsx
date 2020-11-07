@@ -18,7 +18,6 @@ import { Button, Input } from '@material-ui/core';
   const useStyles = makeStyles((theme) => ({
     paper: {
       position: 'absolute',
-      width:280,
       backgroundColor: theme.palette.background.paper,
       border: '2px solid #000',
       boxShadow: theme.shadows[5],
@@ -45,7 +44,7 @@ function Signin({openSignIn,SetopenSignIn}) {
  open={openSignIn}
         onClose={() => SetopenSignIn(false)}
        >
-           <div style={modalStyle} className={classes.paper}>
+           <div style={modalStyle} className={ `${classes.paper} app__signParent`}>
       <form className='app__signup'>
         <center>
         <img className='app__headerImage' src='https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png ' alt=''/>
