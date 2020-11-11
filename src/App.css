@@ -16,26 +16,14 @@
 }
 .header{
   width: 90%;
-  max-width: 1090px;
+  max-width: 1000px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   object-fit: contain;
 }
-.app__headerImage{
-  object-fit: contain;
-}
-.app__signParent{
-  width: 80%;
-  max-width: 400px;
-}
-.app__signInput{
-  margin: 10px 0;
-}
-.app__signup{
-  display: flex;
-  flex-direction: column;
-}
+
+
 .app__posts{
   display: flex;
   justify-content: center;

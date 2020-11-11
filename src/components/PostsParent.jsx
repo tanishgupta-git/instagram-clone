@@ -1,8 +1,10 @@
 import React from 'react'
+import ImageUpload from './ImageUpload';
 import Posts from './Posts';
 
 function PostsParent({posts,user}) {
     return (
+      <div className='Posts'>
         <div className='app__posts'>
         <div className='app__postsLeft'>
           { 
@@ -13,6 +15,8 @@ function PostsParent({posts,user}) {
             })
           }
           </div>         
+          </div>
+         {  user && <ImageUpload username={user.displayName}/> }
           </div>
     )
 }

@@ -1,0 +1,92 @@
+.SignInSignUp {
+    width: 90%;
+    min-height: 100vh;
+    max-width: 1090px;
+    margin: 0 auto;
+}
+
+.SignInSignUp__body {
+    display: flex;
+    justify-content:center;
+    padding: 40px 0;
+}
+.SignInSignUp__left {
+    margin-right: 30px;
+}
+.SignInSignUp__left_svg {
+    height: 350px;
+    margin-top:30px;
+}
+.SignInSignUp__right {
+    display: flex;
+    align-items: center;
+}
+.Sign__headerImage{
+    object-fit: contain;
+    margin-bottom: 20px;
+  }
+
+
+/* form parent box */
+.Sign{
+    width:350px;
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:white;
+    border:1px solid #cccccc;
+}
+  /* form styling */
+.Sign__form {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+.Sign__form input {
+  padding: 8px 10px;
+  background-color: #FAFAFA;
+  border: 1px solid #cccccc;
+  margin:5px 0;
+ border-radius: 3px;
+}
+.Sign__form button {
+    background-color: #0095f6;
+    color: white;
+    border:none;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 6px;
+    font-family: sans-serif;
+    outline: none;
+    font-weight: bold;
+    margin:20px 0;
+}
+.Sign__form button:hover {
+  opacity: 0.7;
+}
+.Sign__error {
+    color: red;
+    margin: 10px 0;
+}
+/* fotter styling */
+.SignInSignUp__fotter {
+    display: flex;
+    justify-content: center;
+    color:#8c8c8c;
+}
+.SignInSignUp__fotter p {
+    font-size: 14px;
+}
+/* media queries for small screen */
+@media screen and (max-width:800px) {
+    .SignInSignUp__left_svg {
+      height: 200px;
+    }
+}
+@media screen and (max-width:650px) {
+    .SignInSignUp__left {
+        display: none;
+    }
+}
+
