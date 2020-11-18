@@ -2,6 +2,9 @@ import React,{useState,useEffect} from 'react'
 import Header from './Header';
 import { db} from '../Firebase';
 import PostsParent from './PostsParent';
+import { Switch,Route } from 'react-router-dom';
+import MyProfile from './MyProfile';
+import Chats from './Chats';
 
 function HomePage({user}) {
     const [posts,Setposts] = useState([]);
@@ -21,7 +24,12 @@ function HomePage({user}) {
     return (
         <div>
         <Header user={user}/>
-        <PostsParent user={user} posts={posts} />
+        <Switch>
+        <Route path='/home' render={ (props) => <PostsParent {...props} user={user} posts={posts} /> } />
+        <Route path='/myprofile' component={MyProfile}/>
+        <Route path='/chats' component={Chats} />
+        </Switch>
+        
         </div>
     )
 }

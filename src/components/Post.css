@@ -11,9 +11,27 @@
     border-bottom: 1px solid lightgray;
 
 }
+.post__likeComment svg{
+    margin: 7px 7px 0 7px;
+    color: #404040;
+    cursor: pointer;    
+  }
+
 .post__text{
     font-weight:normal;
-    padding: 20px;;
+    padding: 10px 10px 0 10px;
+}
+svg.post-liked{
+ color: rgb(237, 73, 86);
+ animation-name:bump;
+ animation-duration: 0.2s;
+}
+@keyframes bump {
+    from {
+        transform: scale(1)
+    }to{
+        transform: scale(1.2);
+    }
 }
 .post__header{
     display:flex;
@@ -23,8 +41,11 @@
 .post__avatar{
     margin:10px;
 }
+.post__likeComment {
+  font-size: 25px; 
+}
 .post__comments{
-    padding: 5px;
+    padding:10px;
 }
 .post__commentBox{
     display: flex;
@@ -35,6 +56,7 @@
     padding: 10px;
     border:none;
     border-top:1px solid lightgray;
+    outline: none;
 }
 .post__button{
     flex:0;

@@ -26,4 +26,4 @@ function SignInAndSignUp({username,Setusername}) {
     )
 }
 
-export default SignInAndSignUp
+export default SignInAndSignUp;

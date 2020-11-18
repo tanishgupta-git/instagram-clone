@@ -29,8 +29,8 @@ function App() {
   return (
     <div className="app">
     <Switch>
-    <Route exact path='/' render={() => user ? (<HomePage user={user} />) : (<Redirect to='/signin' />)} />
-    <Route exact path='/signin' render={() => user ? (<Redirect to='/' />) : (<SignInAndSignUp username={username} Setusername={Setusername} />)}/>
+    <Route exact path='/signin' render={() => user ? (<Redirect to='/home' />) : (<SignInAndSignUp username={username} Setusername={Setusername} />)}/>
+    <Route  path='/' render={() => user ? (<HomePage user={user} />) : (<Redirect to='/signin' />)} />
     </Switch> 
     </div> 
   );
