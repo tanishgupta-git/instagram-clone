@@ -27,7 +27,7 @@ function HomePage({user}) {
         <Switch>
         <Route path='/home' render={ (props) => <PostsParent {...props} user={user} posts={posts} /> } />
         <Route path='/myprofile' component={MyProfile}/>
-        <Route path='/chats' component={Chats} />
+        <Route path='/chats' render={ (props) => <Chats user={user} /> } />
         </Switch>
         
         </div>

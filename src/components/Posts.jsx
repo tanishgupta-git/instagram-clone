@@ -11,20 +11,23 @@ function Posts({user,postId,username,imageUrl,caption}) {
   const [comment,Setcomment] = useState('');
   const [likes,Setlikes] = useState(0);
   const [liked,Setliked] =  useState(false);
+
   useEffect( () => {
     let unsubscribe;
     let unsubscribeLike;
+
     if(postId){
-      console.log(user);
+
       unsubscribe = db.collection("posts").doc(postId).collection("comments").orderBy('timestamp','desc')
       .onSnapshot( (snapshot) => {
         Setcomments(snapshot.docs.map( (doc) => doc.data()));
       })
+
       unsubscribeLike = db.collection("posts").doc(postId).collection("likes").orderBy('timestamp','desc')
       .onSnapshot( (snapshot) => {
         snapshot.docs.forEach( (doc) => {
           if (doc.data().userId === user.uid) {
-            Setliked(prev => !prev);
+            Setliked(true);
           }  
         })
         Setlikes(snapshot.docs.length);
@@ -36,7 +39,8 @@ function Posts({user,postId,username,imageUrl,caption}) {
       unsubscribe();
       unsubscribeLike();
     };
-  },[postId,user])
+  },[postId,user.uid])
+
 // function for commenting to the post
   const postComment = (event) => {
     event.preventDefault();
@@ -47,21 +51,19 @@ function Posts({user,postId,username,imageUrl,caption}) {
     });
     Setcomment('');
   }
+
 // function for adding like to the post by uid provided by the firebase
   const addLiked = () => {
     db.collection("posts").doc(postId).collection('likes').doc(user.uid).set({
       userId:user.uid,
       timestamp:firebase.firestore.FieldValue.serverTimestamp()
-    }).then(() =>  Setliked(prev => !prev))
+    }).then(() =>  Setliked(true))
   }
+
   // function for removing the like from the post 
   const removeLiked = () => {
-    db.collection("posts")
-    .doc(postId)
-    .collection('likes')
-    .doc(user.uid)
-    .delete()
-    .then( () => Setliked(prev => !prev))
+    db.collection("posts").doc(postId).collection('likes').doc(user.uid).delete()
+    .then( () => Setliked(false))
   }
 
     return (
@@ -70,13 +72,18 @@ function Posts({user,postId,username,imageUrl,caption}) {
           <Avatar className='post__avatar' alt={username}  src='./static/images/avatar/1.jpg' />
           <h3>{username}</h3>
           </div> 
+
           <img className='post__image' src={imageUrl} alt=''/>
+
           <div className='post__likeComment'>
+            
             { liked ? <BsHeartFill className='post-liked' onClick={removeLiked}/> : <BsHeart onClick={addLiked} /> }
             <BsChat />
           </div>
+
           <h4 className='post__text'><strong>{likes} Likes</strong></h4>
           <h4 className='post__text'><strong>{username}</strong> {caption}</h4>
+          
            <div className="post__comments">
               {
                 comments.map( (comment) => (
