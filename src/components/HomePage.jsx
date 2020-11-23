@@ -5,7 +5,7 @@ import PostsParent from './PostsParent';
 import { Switch,Route } from 'react-router-dom';
 import MyProfile from './MyProfile';
 import Chats from './Chats';
-import Loading from '../static/Loading.gif';
+
 
 function HomePage({user}) {
     const [posts,Setposts] = useState([]);
@@ -26,7 +26,7 @@ function HomePage({user}) {
 
     return (  
         <div style={{width:'100%',height:'100%'}}>
-        {loading && <div className='loading'><Loading /></div>}
+        {loading && <div className='loading'>loading</div>}
         <Header user={user}/>
         <Switch>
         <Route path='/home' render={ (props) => <PostsParent {...props} user={user} posts={posts} /> } />
