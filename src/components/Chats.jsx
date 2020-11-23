@@ -1,25 +1,35 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useRef} from 'react';
 import { db } from '../Firebase';
 import firebase from 'firebase';
 import { BsChat } from "react-icons/bs";
 import './Chats.css';
+import Spinner from './Spinner';
 
 function Chats({user}) {
     const [chats,Setchats] = useState([]);
+    const [lastfetch,Setlastfetch] = useState();
     const [message,Setmessage] = useState('');
+    const [isLoading,SetisLoading] = useState(false);
+    const refreDiv = useRef();
+
     // fetching all the chats from firebase
     useEffect( () => {
         let unsubscribe;
-        unsubscribe= db.collection('chats').orderBy('timestamp','asc').onSnapshot( snapshot => { 
+        // limiting total messages fetch when load
+        unsubscribe = db.collection('chats').orderBy('timestamp','desc').limit(14).onSnapshot( snapshot => { 
             Setchats(snapshot.docs.map( doc => ({
                 id:doc.id,
                 chat:doc.data()
             })
-            ))
+            ).reverse());
+            Setlastfetch(snapshot.docs[snapshot.docs.length -1]);
+            
+            refreDiv.current.scrollTop = refreDiv.current.scrollHeight - refreDiv.current.clientHeight;
         })
-
+          
         return ( () => unsubscribe())
     },[])
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         db.collection('chats').add({
@@ -29,13 +39,29 @@ function Chats({user}) {
           timestamp:firebase.firestore.FieldValue.serverTimestamp()
         }).then( () => Setmessage(''))
     }
+    const handleScroll  = (e) => {
+
+     if(e.target.scrollTop === 0) {
+         SetisLoading(true);
+     }
+    }
+    useEffect(() => {
+        if(!isLoading) return;
+        setTimeout ( () => db.collection('chats').orderBy('timestamp','desc').startAfter(lastfetch).limit(14).get().then(snapshot => {
+            if(snapshot.docs.length && lastfetch.id === snapshot.docs[snapshot.docs.length - 1].id) return snapshot;
+            Setchats(prevState => [...(snapshot.docs.map(doc => ({id:doc.id,chat:doc.data()}) ).reverse()),...prevState]);
+            return snapshot;
+        }).then( (snapshot) => {if(snapshot.docs.length && !(lastfetch.id === snapshot.docs[snapshot.docs.length - 1].id)) Setlastfetch(snapshot.docs[snapshot.docs.length - 1])}).then(() => { SetisLoading(false)}),1500)
+
+    },[isLoading,lastfetch])
     return (
-        <div className='chats'>
+    <div className='chatsParent'>
+        <div className='chats' ref={refreDiv} onScroll={handleScroll}>
         <h2 className='chats__heading'><BsChat /> Insta-clone Chat Room</h2>
+        { isLoading && <Spinner /> }
          { chats.map( chat => chat.chat.userId === user.uid ? (
              <div  key={chat.id} className="chat__userParent">
              <div  className='chat__user'>
-             <span className='chat__username'>You</span>
             { chat.chat.message}
          </div>
          </div>):(
@@ -54,6 +80,7 @@ function Chats({user}) {
          </form>
          </div>
 
+        </div>
         </div>
     )
 }

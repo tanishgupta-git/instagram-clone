@@ -5,9 +5,12 @@ import PostsParent from './PostsParent';
 import { Switch,Route } from 'react-router-dom';
 import MyProfile from './MyProfile';
 import Chats from './Chats';
+import Loading from '../static/Loading.gif';
 
 function HomePage({user}) {
     const [posts,Setposts] = useState([]);
+    const [loading,Setloading] = useState(true);
+
     //   fetching the post from firebase
   useEffect(() => {
     // runs every time when post chnages
@@ -16,13 +19,14 @@ function HomePage({user}) {
         id:doc.id,
         post:doc.data()
       })))
-
+     Setloading(false);
     })
 
   },[])
 
-    return (
-        <div>
+    return (  
+        <div style={{width:'100%',height:'100%'}}>
+        {loading && <div className='loading'><Loading /></div>}
         <Header user={user}/>
         <Switch>
         <Route path='/home' render={ (props) => <PostsParent {...props} user={user} posts={posts} /> } />

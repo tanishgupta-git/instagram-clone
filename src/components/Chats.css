@@ -1,12 +1,17 @@
 /* styling the message box of user and others */
+.chatsParent {
+    height:calc(100vh - 58px);
+    padding: 20px 0 0 0;
+}
 .chats {
     position: relative;
     background-color: white;
-    min-height:90vh;
+    width:100%;
+    max-width:900px;
+    height: 100%;
+    overflow:auto;
     padding-bottom: 60px;
-    width:99.99%;
-    max-width: 900px;
-    margin: 10px auto 0 auto;
+    margin: 0px auto 0 auto;
     border:1px solid #cccccc;
 }
 .chats__heading {
@@ -19,25 +24,23 @@
     justify-content: flex-end;
 }
 .chat__user {
- position: relative;
- display: inline-block;
+display: inline-flex;
+flex-direction: column;
  background-color:  #f2f2f2;
- padding: 25px 25px 20px 25px;
+ padding: 20px;
  margin: 10px 10px 10px 40px;
  border-radius: 20px;
 }
 .chat__other {
- position: relative;
- display: inline-block;
+ display: inline-flex;
+ flex-direction: column;
  border: 1px solid  #d9d9d9;
- padding: 25px 25px 20px 25px;
+ padding: 10px 25px 15px 15px;
  margin: 10px 40px 10px 10px;
  border-radius:20px;    
 }
 .chat__username {
-position: absolute;
-top:2px;
-left: 15px;
+
 color:#595959;
 font-size: 15px;
 font-weight: bold;
@@ -52,7 +55,7 @@ font-weight: bold;
     padding: 10px 0;
 }
 .chat__form {
-    width: 95%;
+    width: 90%;
     margin: 0 auto;
    position: relative;   
 }
@@ -76,10 +79,8 @@ font-weight: bold;
     color: #0099ff;
 }
 
-/* media queries for small screen */
 @media screen and (max-width:900px) {
-    .chats {
-        margin:0;
-        min-height: 92vh;
+    .chatsParent {
+        padding: 0;
     }
 }

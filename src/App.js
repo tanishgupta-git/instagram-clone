@@ -27,7 +27,7 @@ function App() {
 
 
   return (
-    <div className="app">
+    <div className="app" style={{ width:'100%',height:'100%'}}>
     <Switch>
     <Route exact path='/signin' render={() => user ? (<Redirect to='/home' />) : (<SignInAndSignUp username={username} Setusername={Setusername} />)}/>
     <Route  path='/' render={() => user ? (<HomePage user={user} />) : (<Redirect to='/signin' />)} />

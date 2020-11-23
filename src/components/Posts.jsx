@@ -105,4 +105,3 @@ function Posts({user,postId,username,imageUrl,caption}) {
     )
 }
 export default Posts
-         

@@ -1,12 +1,16 @@
-*{
-  margin:0px;
-  box-sizing: border-box;
-}
-.app,html,body{
-  background-color: #fafafa;
-}
-
 .app__posts{
   display: flex;
   justify-content: center;
+}
+
+/* loading styles for pages */
+.loading {
+  position: absolute;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
