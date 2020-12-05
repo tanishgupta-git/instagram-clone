@@ -61,6 +61,8 @@
     outline: none;
     font-weight: bold;
     margin:20px 0;
+    display: flex;
+    justify-content: center;
 }
 .Sign__form button:hover {
   opacity: 0.7;
@@ -78,6 +80,21 @@
 .SignInSignUp__fotter p {
     font-size: 14px;
 }
+/* loading animation*/
+.SignSpinner{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(195, 195, 195, 0.6);
+    border-radius: 50%;
+    border-top-color: #636767;
+    animation: spin 1s ease-in-out infinite;
+  }
+  @keyframes spin {
+      to {
+        -webkit-transform: rotate(360deg);
+      }
+    }
 /* media queries for small screen */
 @media screen and (max-width:800px) {
     .SignInSignUp__left_svg {

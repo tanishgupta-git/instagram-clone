@@ -5,15 +5,19 @@ import { BsChat } from "react-icons/bs";
 import './Chats.css';
 import Spinner from './Spinner';
 
-function Chats({user}) {
+function Chats({user,SetopenPop}) {
     const [chats,Setchats] = useState([]);
     const [lastfetch,Setlastfetch] = useState();
     const [message,Setmessage] = useState('');
     const [isLoading,SetisLoading] = useState(false);
-    const refreDiv = useRef();
 
+    const refreDiv = useRef();
+    useEffect(() => {
+        SetopenPop(false)
+    },[SetopenPop])
     // fetching all the chats from firebase
     useEffect( () => {
+        
         let unsubscribe;
         // limiting total messages fetch when load
         unsubscribe = db.collection('chats').orderBy('timestamp','desc').limit(14).onSnapshot( snapshot => { 
@@ -51,7 +55,8 @@ function Chats({user}) {
             if(snapshot.docs.length && lastfetch.id === snapshot.docs[snapshot.docs.length - 1].id) return snapshot;
             Setchats(prevState => [...(snapshot.docs.map(doc => ({id:doc.id,chat:doc.data()}) ).reverse()),...prevState]);
             return snapshot;
-        }).then( (snapshot) => {if(snapshot.docs.length && !(lastfetch.id === snapshot.docs[snapshot.docs.length - 1].id)) Setlastfetch(snapshot.docs[snapshot.docs.length - 1])}).then(() => { SetisLoading(false)}),1500)
+        }).then( (snapshot) => {if(snapshot.docs.length && !(lastfetch.id === snapshot.docs[snapshot.docs.length - 1].id)) Setlastfetch(snapshot.docs[snapshot.docs.length - 1])})
+        .then(() => { SetisLoading(false)}),1500)
 
     },[isLoading,lastfetch])
     return (
@@ -86,4 +91,3 @@ function Chats({user}) {
 }
 
 export default Chats;
- 

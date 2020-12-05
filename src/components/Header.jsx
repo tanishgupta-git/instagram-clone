@@ -1,11 +1,10 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { auth} from '../Firebase';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import { FaRegUserCircle,FaBars} from "react-icons/fa";
-import { RiHome2Line,RiSendPlaneLine } from "react-icons/ri";
-function Header({user}) {
-  const [openPop,SetopenPop] = useState(false);
+import { RiHome2Line,RiSendPlaneLine,RiAddCircleLine } from "react-icons/ri";
+function Header({user,openPop,SetopenPop}) {
     return (
         <div className='header'>
         <div className='header__main'>
@@ -16,6 +15,7 @@ function Header({user}) {
         <span onClick={ () => SetopenPop( prev => !prev)}><FaBars className='header__popupParentIcon'/></span>
         { openPop && <div className='header__popup'>
         <Link to='/myprofile'><FaRegUserCircle className='header__popupIcon'/> My Profile</Link>
+        <Link to='/addpost'><RiAddCircleLine className='header__popupIcon' /> Add New Post</Link>
         <span onClick={() => auth.signOut()}>Logout</span>
         </div> }
         </span>

@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from 'react';
-import './App.css';
 import { auth} from './Firebase';
 import { Switch,Route, Redirect } from 'react-router-dom';
 import SignInAndSignUp from './components/SignInAndSignUp';

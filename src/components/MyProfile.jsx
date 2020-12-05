@@ -1,10 +1,13 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import './MyProfile.css';
 
-function MyProfile() {
+function MyProfile({SetopenPop}) {
+    useEffect(() => {
+        SetopenPop(false);  
+    },[SetopenPop])
     return (
         <div>
-        instagram-clone web app is under production so you may see update of this page aftersmetime
+        instagram-clone web app is under production so you may see update of this page aftersometime
         </div>
     )
 }
