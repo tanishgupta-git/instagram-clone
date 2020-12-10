@@ -18,7 +18,7 @@ function PostsParent({posts,user,SetopenPop}) {
           { 
             posts.map( ({id,post}) => {
               return  (
-                <Posts key={id} postId = {id} user={user} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
+                <Posts key={id} postId ={id} user={user} post={post} />
               )
             })
           }

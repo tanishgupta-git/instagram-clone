@@ -1,6 +1,7 @@
 import React,{useState,useEffect,useRef} from 'react';
 import { db } from '../Firebase';
 import firebase from 'firebase';
+import {Link} from 'react-router-dom';
 import { BsChat } from "react-icons/bs";
 import './Chats.css';
 import Spinner from './Spinner';
@@ -72,7 +73,7 @@ function Chats({user,SetopenPop}) {
          </div>):(
              <div key={chat.id} className="chat__otherParent">
              <div  className='chat__other'>
-             <span className='chat__username'>{chat.chat.username}</span>
+             <span className='chat__username'><Link to={`/myprofile/${chat.chat.username}/${chat.chat.userId}`}>{chat.chat.username}</Link></span>
               { chat.chat.message}
              </div>
              </div>

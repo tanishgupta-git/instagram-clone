@@ -3,9 +3,10 @@ import './Post.css';
 import Avatar from '@material-ui/core/Avatar';
 import { db } from '../Firebase';
 import firebase from 'firebase';
+import { Link } from 'react-router-dom';
 import { BsHeart,BsHeartFill,BsChat } from "react-icons/bs";
 
-function Posts({user,postId,username,imageUrl,caption}) {
+function Posts({user,postId,post}) {
  
   const [comments,Setcomments] = useState([]);
   const [comment,Setcomment] = useState('');
@@ -47,6 +48,7 @@ function Posts({user,postId,username,imageUrl,caption}) {
     db.collection("posts").doc(postId).collection('comments').add({
       text:comment,
       username:user.displayName,
+      userId:user.uid,
       timestamp:firebase.firestore.FieldValue.serverTimestamp()
     });
     Setcomment('');
@@ -69,11 +71,11 @@ function Posts({user,postId,username,imageUrl,caption}) {
     return (
         <div className='post'>
           <div className='post__header'>
-          <Avatar className='post__avatar' alt={username}  src='./static/images/avatar/1.jpg' />
-          <h4>{username}</h4>
+          <Link to={`/myProfile/${post.userId}`} ><Avatar className='post__avatar' alt={post.username}  src='./static/images/avatar/1.jpg' /></Link>
+          <h4><Link to={`/myProfile/${post.username}/${post.userId}`} >{post.username}</Link></h4>
           </div> 
 
-          <img className='post__image' src={imageUrl} alt=''/>
+          <img className='post__image' src={post.imageUrl} alt=''/>
 
           <div className='post__likeComment'>
             
@@ -82,7 +84,7 @@ function Posts({user,postId,username,imageUrl,caption}) {
           </div>
 
           <h4 className='post__text'><strong>{likes} Likes</strong></h4>
-          <h4 className='post__text'><strong>{username}</strong> {caption}</h4>
+          <h4 className='post__text'><strong><Link  to={`/myProfile/${post.username}/${post.userId}`} >{post.username}</Link></strong> {post.caption}</h4>
           
            <div className="post__comments">
               {

@@ -4,12 +4,13 @@ import { db} from '../Firebase';
 import PostsParent from './PostsParent';
 import { Switch,Route } from 'react-router-dom';
 import MyProfile from './MyProfile';
+import EditProfile from './EditProfile';
 import Chats from './Chats';
 import ImageUpload from './ImageUpload';
 import './HomePage.css';
 import Loading from '../static/Loading.gif';
 
-function HomePage({user}) {
+function HomePage({props,user}) {
     const [posts,Setposts] = useState([]);
     const [loading,Setloading] = useState(true);
     const [openPop,SetopenPop] = useState(false);
@@ -23,7 +24,6 @@ function HomePage({user}) {
       })))
      Setloading(false);
     })
-
   },[])
 
     return (  
@@ -32,9 +32,10 @@ function HomePage({user}) {
         <Header user={user} openPop={openPop} SetopenPop={SetopenPop}/>
         <Switch>
         <Route path='/home' render={ (props) => <PostsParent {...props} user={user} posts={posts} SetopenPop={SetopenPop} /> } />
-        <Route path='/myprofile' render={(props) => <MyProfile {...props} SetopenPop={SetopenPop} /> } />
+        <Route exact path='/myprofile/:username/:userId' render={(props) => <MyProfile props={props} user={user} SetopenPop={SetopenPop} /> } />
+        <Route path='/myprofile/:username/:userId/edit' render={(props) => <EditProfile props={props} user={user} SetopenPop={SetopenPop} /> } />
         <Route path='/chats' render={ (props) => <Chats {...props} user={user} SetopenPop={SetopenPop}/> } />
-        <Route path='/addpost' render={ (props) => <ImageUpload  {...props} username={user.displayName} SetopenPop={SetopenPop} />} />
+        <Route path='/addpost' render={ (props) => <ImageUpload  props={props} user={user} SetopenPop={SetopenPop} />} />
         </Switch>
         </div>
     )

@@ -4,7 +4,7 @@ import firebase from 'firebase';
 import './ImageUpload.css';
 import { RiAddCircleLine } from "react-icons/ri"; 
 import { BsUpload } from "react-icons/bs";
-function ImageUpload({username,SetopenPop}) {
+function ImageUpload({props,user,SetopenPop}) {
    const [caption,Setcaption]  = useState('');
    const [image,Setimage] = useState(null);
    const [error,Seterror] = useState(null);
@@ -47,11 +47,13 @@ function ImageUpload({username,SetopenPop}) {
                       timeStamp:firebase.firestore.FieldValue.serverTimestamp(),
                       caption:caption, 
                       imageUrl:url,
-                      username:username
+                      username:user.displayName,
+                      userId:user.uid
                   });
                   Setprogress(0);
                   Setcaption(" ");
                   Setimage(null);
+                  props.history.push('/home');
               })
           }
       )

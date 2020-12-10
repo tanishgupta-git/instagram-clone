@@ -8,15 +8,15 @@ function Header({user,openPop,SetopenPop}) {
     return (
         <div className='header'>
         <div className='header__main'>
-       <a href='/'><img className='app__headerImage' src='https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png ' alt=''/></a>
+       <Link to='/home'><img className='app__headerImage' src='https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png ' alt=''/></Link>
         <span className='header__popupParent'>
         <Link to='/home'><RiHome2Line className='header__popupParentIcon'/></Link>
         <Link to='/chats'><RiSendPlaneLine className='header__popupParentIcon'/></Link>
         <span onClick={ () => SetopenPop( prev => !prev)}><FaBars className='header__popupParentIcon'/></span>
         { openPop && <div className='header__popup'>
-        <Link to='/myprofile'><FaRegUserCircle className='header__popupIcon'/> My Profile</Link>
+        <Link to={`/myprofile/${user.displayName}/${user.uid}`} ><FaRegUserCircle className='header__popupIcon'/> My Profile</Link>
         <Link to='/addpost'><RiAddCircleLine className='header__popupIcon' /> Add New Post</Link>
-        <span onClick={() => auth.signOut()}>Logout</span>
+        <span className='header__logout' onClick={() => auth.signOut()}>Logout</span>
         </div> }
         </span>
         </div>

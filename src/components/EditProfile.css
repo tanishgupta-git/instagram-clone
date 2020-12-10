@@ -1,0 +1,111 @@
+.editProfile {
+    width:100%;
+    max-width: 900px;
+    background-color: white;
+    border:1px solid #bfbfbfbf;
+    padding: 20px;
+    margin: 20px auto;
+}
+/* styling the form */
+.editProfile__form {
+    width: 95%;
+    margin: 10px auto;
+    max-width:500px;
+}
+.editProfile__form__userInfo__userimage {
+    display: inline-block;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    overflow: hidden;
+    margin-right: 40px;
+    border-radius: 50%;
+    
+}
+.editProfile__form__userInfo__userimage img{
+    width:100%;
+    height: auto;
+}
+.editProfile__form__error {
+    color: red;
+}
+.editProfile__form__userInfo {
+    display: flex;
+    align-items: center;
+}
+.editProfile__form__userInfo__changeImage {
+    color: #0095f6;
+    font-weight: bolder;
+    font-family: sans-serif;
+    cursor: pointer;
+}
+.editProfile__form__userInfo__changeImage:hover{
+    opacity: 0.8;
+}
+.editProfile__form__userInfo__changeImage input{
+   width: 0;
+   height: 0;
+   opacity: 0;
+}
+.editProfile__form__userInfo__username {
+    font-size: 20px;
+    font-weight: 400;
+}
+.editProfile__form__Inputdiv {
+    margin: 30px 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.editProfile__form__Inputdiv__label{
+    flex-grow: 0;
+    font-weight: 600;
+}
+.editProfile__form__Inputdiv__input,.editProfile__form__Inputdiv__textarea {
+    width: 80%;
+    padding:10px;
+    border:1px solid #b3b3b3;
+    border-radius: 2px;
+    font-size: 15px;
+}
+.editProfile__form__mutedtext{
+    color: #8e8e8e;
+    margin-top:5px;
+    font-size: 13px;
+}
+.editProfile__form__submit {
+    background-color: #0095f6;
+    color: white;
+    border:none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100px;
+    height: 40px;
+    margin-top:30px;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.editProfile__form__submit:hover{
+    opacity: 0.8;
+}
+/* loading animation*/
+.editProfile__form__submit__spinner{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(195, 195, 195, 0.6);
+    border-radius: 50%;
+    border-top-color: #636767;
+    animation: spin 1s ease-in-out infinite;
+  }
+  @keyframes spin {
+      to {
+        -webkit-transform: rotate(360deg);
+      }
+    }

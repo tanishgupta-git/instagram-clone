@@ -42,4 +42,4 @@ function Signup({username,Setusername}) {
     )
 }
 
-export default Signup
+export default Signup;

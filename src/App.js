@@ -8,7 +8,6 @@ function App() {
   
   const [user,Setuser] = useState(null);
   const [username,Setusername] = useState("");
-
   //  fetching the user from firebase
   useEffect( () => {
     const unsubscribe =  auth.onAuthStateChanged((authUser) => {
@@ -22,6 +21,7 @@ function App() {
     return () => {
       unsubscribe();
     }
+
   },[user,username]);
 
 
@@ -29,7 +29,7 @@ function App() {
     <div className="app" style={{ width:'100%',height:'100%'}}>
     <Switch>
     <Route exact path='/signin' render={() => user ? (<Redirect to='/home' />) : (<SignInAndSignUp username={username} Setusername={Setusername} />)}/>
-    <Route  path='/' render={() => user ? (<HomePage user={user} />) : (<Redirect to='/signin' />)} />
+    <Route  path='/' render={(props) => user ? (<HomePage {...props} user={user} />) : (<Redirect to='/signin' />)} />
     </Switch> 
     </div> 
   );
