@@ -6,7 +6,7 @@ import { BsChat } from "react-icons/bs";
 import './Chats.css';
 import Spinner from './Spinner';
 
-function Chats({user,SetopenPop}) {
+function Chats({props,user,SetopenPop}) {
     const [chats,Setchats] = useState([]);
     const [lastfetch,Setlastfetch] = useState();
     const [message,Setmessage] = useState('');
