@@ -50,6 +50,7 @@
 }
 .myProfile__intro__bio{
   margin: 7px 0;
+  white-space: pre-wrap;
 }
 .myProfile__intro__edit{
     text-decoration: none;

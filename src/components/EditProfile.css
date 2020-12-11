@@ -12,6 +12,10 @@
     margin: 10px auto;
     max-width:500px;
 }
+.editProfile__form__heading {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
 .editProfile__form__userInfo__userimage {
     display: inline-block;
     position: relative;
@@ -39,7 +43,7 @@
     font-weight: bolder;
     font-family: sans-serif;
     cursor: pointer;
-}
+}   
 .editProfile__form__userInfo__changeImage:hover{
     opacity: 0.8;
 }
@@ -109,4 +113,19 @@
         -webkit-transform: rotate(360deg);
       }
     }
-    
+
+/* code for other devices */
+@media screen and (max-width:500px) {
+    .editProfile__form__userInfo {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .editProfile__form__Inputdiv {
+        flex-direction: column;
+        align-items: flex-start;
+    } 
+    .editProfile__form__Inputdiv__input,.editProfile__form__Inputdiv__textarea {
+        width: 100%;
+        margin-top: 10px;
+    }  
+}

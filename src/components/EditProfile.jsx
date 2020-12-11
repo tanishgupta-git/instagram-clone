@@ -71,9 +71,9 @@ function EditProfile({props,user,SetopenPop}) {
    }
     return (
         <div className='editProfile'>
-          <h3>Edit Profile</h3>
 
           <form className='editProfile__form' onSubmit={handleSubmit}>
+          <h3 className='editProfile__form__heading'>Edit Profile</h3>
            <p className='editProfile__form__error'>{error}</p>
           <div className='editProfile__form__userInfo'>
            <div className='editProfile__form__userInfo__userimage'>

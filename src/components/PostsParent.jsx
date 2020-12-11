@@ -5,12 +5,16 @@ import './PostParent.css';
 import { RiAddCircleLine } from "react-icons/ri";
 import UserOnline from '../static/UserOnline.svg';
 
-function PostsParent({posts,user,SetopenPop}) {
+function PostsParent({posts,user,SetopenPop,SethomeClick}) {
 
     // setting the popup to false
     useEffect(() => {
       SetopenPop(false);
     },[SetopenPop])
+    useEffect(() => {
+       SethomeClick(true);
+       return () => SethomeClick(false);
+    })
     return (
       <div className='Posts'>
         <div className='app__posts'>

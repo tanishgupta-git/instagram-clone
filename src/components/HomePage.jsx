@@ -14,6 +14,8 @@ function HomePage({props,user}) {
     const [posts,Setposts] = useState([]);
     const [loading,Setloading] = useState(true);
     const [openPop,SetopenPop] = useState(false);
+    const [homeClick,SethomeClick] = useState(false);
+    const [chatsClick,SetchatsClick] = useState(false);
     //   fetching the post from firebase
   useEffect(() => {
     // runs every time when post chnages
@@ -29,12 +31,12 @@ function HomePage({props,user}) {
     return (  
         <div className='HomePage' style={{width:'100%',height:'100%'}}>
         {loading && <div className='loading'><img src={Loading} alt=''/></div>}
-        <Header user={user} openPop={openPop} SetopenPop={SetopenPop}/>
+        <Header user={user} openPop={openPop} SetopenPop={SetopenPop} homeClick={homeClick} chatsClick={chatsClick}/>
         <Switch>
-        <Route path='/home' render={ (props) => <PostsParent {...props} user={user} posts={posts} SetopenPop={SetopenPop} /> } />
+        <Route path='/home' render={ (props) => <PostsParent {...props} user={user} posts={posts} SetopenPop={SetopenPop} SethomeClick={SethomeClick} /> } />
         <Route exact path='/myprofile/:username/:userId' render={(props) => <MyProfile props={props} user={user} SetopenPop={SetopenPop} /> } />
         <Route path='/myprofile/:username/:userId/edit' render={(props) => <EditProfile props={props} user={user} SetopenPop={SetopenPop} /> } />
-        <Route path='/chats' render={ (props) => <Chats {...props} user={user} SetopenPop={SetopenPop}/> } />
+        <Route path='/chats' render={ (props) => <Chats {...props} user={user} SetopenPop={SetopenPop} SetchatsClick={SetchatsClick} /> } />
         <Route path='/addpost' render={ (props) => <ImageUpload  props={props} user={user} SetopenPop={SetopenPop} />} />
         </Switch>
         </div>
