@@ -12,6 +12,7 @@ function Posts({user,postId,post}) {
   const [comment,Setcomment] = useState('');
   const [likes,Setlikes] = useState(0);
   const [liked,Setliked] =  useState(false);
+  const [postUserImage,SetpostUserImage] = useState("");
 
   useEffect( () => {
     let unsubscribe;
@@ -42,6 +43,13 @@ function Posts({user,postId,post}) {
     };
   },[postId,user.uid])
 
+  // fetching the post user imageUrl
+  useEffect(() => {
+    db.collection('users').doc(post.userId).onSnapshot(function(doc) {
+      SetpostUserImage(doc.data().imageUrl);
+  })
+  })
+
 // function for commenting to the post
   const postComment = (event) => {
     event.preventDefault();
@@ -71,7 +79,7 @@ function Posts({user,postId,post}) {
     return (
         <div className='post'>
           <div className='post__header'>
-          <Link to={`/myProfile/${post.userId}`} ><Avatar className='post__avatar' alt={post.username}  src='./static/images/avatar/1.jpg' /></Link>
+          <Link to={`/myProfile/${post.userId}`} ><Avatar className='post__avatar' alt={post.username}  src={ !!postUserImage ? postUserImage:" " } /></Link>
           <h4><Link to={`/myProfile/${post.username}/${post.userId}`} >{post.username}</Link></h4>
           </div> 
 

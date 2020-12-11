@@ -1,12 +1,24 @@
-import React,{useEffect} from 'react'
+import React,{useState,useEffect} from 'react'
 import Posts from './Posts';
+import { db} from '../Firebase';
 import {Link} from 'react-router-dom';
 import './PostParent.css';
 import { RiAddCircleLine } from "react-icons/ri";
 import UserOnline from '../static/UserOnline.svg';
 
-function PostsParent({posts,user,SetopenPop,SethomeClick}) {
-
+function PostsParent({user,SetopenPop,SethomeClick,Setloading}) {
+  const [posts,Setposts] = useState([]);
+      //   fetching the post from firebase
+      useEffect(() => {
+        // runs every time when post chnages
+        db.collection('posts').orderBy('timeStamp','desc').onSnapshot( snapshot => {
+          Setposts(snapshot.docs.map(doc => ({
+            id:doc.id,
+            post:doc.data()
+          })))
+         Setloading(false);
+        })
+      },[Setloading])
     // setting the popup to false
     useEffect(() => {
       SetopenPop(false);
