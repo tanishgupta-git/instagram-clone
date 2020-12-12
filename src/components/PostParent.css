@@ -1,6 +1,6 @@
 .app__posts{
     width: 100%;
-    max-width: 1000px;
+    max-width: 1020px;
     margin: 0 auto;
     position: relative;
     display: flex;
@@ -8,9 +8,13 @@
   }
 
   /* styling the right part of parent posts */
+  .app__postsLeft{
+    width: 65%;
+  }
   .app__postsRight {
       margin: 20px 0;
-      max-width: 400px;
+      width: 28%;
+      max-width: 300px;
   }
   .app__postsRight a {
     color: #595959;
@@ -54,5 +58,9 @@
     }
     .app__postsRight {
         display: none;
+    }
+    .app__postsLeft {
+      width: 100%;
+      max-width: 700px;
     }   
   }
