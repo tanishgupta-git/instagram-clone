@@ -8,7 +8,7 @@ import { BsHeart,BsHeartFill,BsChat } from "react-icons/bs";
 
 function Posts({user,postId,post}) {
  
-  const [comments,Setcomments] = useState([]);
+  const [commentsCount,SetcommentsCount] = useState();
   const [comment,Setcomment] = useState('');
   const [likes,Setlikes] = useState(0);
   const [liked,Setliked] =  useState(false);
@@ -22,7 +22,7 @@ function Posts({user,postId,post}) {
 
       unsubscribe = db.collection("posts").doc(postId).collection("comments").orderBy('timestamp','desc')
       .onSnapshot( (snapshot) => {
-        Setcomments(snapshot.docs.map( (doc) => doc.data()));
+        SetcommentsCount(snapshot.docs.length);
       })
 
       unsubscribeLike = db.collection("posts").doc(postId).collection("likes").orderBy('timestamp','desc')
@@ -79,7 +79,7 @@ function Posts({user,postId,post}) {
     return (
         <div className='post'>
           <div className='post__header'>
-          <Link to={`/myProfile/${post.userId}`} ><Avatar className='post__avatar' alt={post.username}  src={ !!postUserImage ? postUserImage:" " } /></Link>
+          <Link to={`/myProfile/${post.username}/${post.userId}`} ><Avatar className='post__avatar' alt={post.username}  src={ !!postUserImage ? postUserImage:" " } /></Link>
           <h4><Link to={`/myProfile/${post.username}/${post.userId}`} >{post.username}</Link></h4>
           </div> 
 
@@ -88,21 +88,14 @@ function Posts({user,postId,post}) {
           <div className='post__likeComment'>
             
             { liked ? <BsHeartFill className='post-liked' onClick={removeLiked}/> : <BsHeart onClick={addLiked} /> }
-            <BsChat />
+            <Link to={{pathname:`/p/${postId}`,post:post,postUserImage:postUserImage,likes:likes}}><BsChat /></Link>
           </div>
 
           <h4 className='post__text'><strong>{likes} Likes</strong></h4>
           <h4 className='post__text'><strong><Link  to={`/myProfile/${post.username}/${post.userId}`} >{post.username}</Link></strong> {post.caption}</h4>
           
-           <div className="post__comments">
-              {
-                comments.map( (comment) => (
-                   ( <p key={Math.random()}>
-                      <strong>{comment.username}</strong> {comment.text}
-                    </p>)
-    
-                ))
-              }
+           <div className="post__commentsCount">
+              { !commentsCount ? "" : <Link to={{pathname:`/p/${postId}`,post:post,postUserImage:postUserImage}}>View all {commentsCount} comments</Link>}
            </div>
           
         { user && 

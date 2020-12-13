@@ -64,7 +64,7 @@ function MyProfile({props,SetopenPop,user}) {
            </div>
         }
          { user.uid === props.match.params.userId ?  <p className='myProfile__intro__updated'>Keep Your Profile Updated So That Visitors Get To Know More About You</p>:"" }
-           <p className='myProfile__copyright'>&copy; 2020 InstaClone By Tanish Gupta</p>
+           <p className='myProfile__copyright'>&copy; 2021 InstaClone By Tanish Gupta</p>
         </div>
     )
 }

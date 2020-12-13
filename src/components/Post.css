@@ -44,8 +44,10 @@ svg.post-liked{
 .post__likeComment {
   font-size: 25px; 
 }
-.post__comments{
-    padding:10px;
+.post__commentsCount a{
+   color:#8e8e8e;
+   display: inline-block;
+   margin:10px;
 }
 .post__commentBox{
     display: flex;

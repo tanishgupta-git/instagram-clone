@@ -19,7 +19,7 @@ function SignInAndSignUp({username,Setusername}) {
       </div> 
       </div>
     <div className='SignInSignUp__fotter'>
-       <p>2020 Instagram-Clone Developed by Tanish Gupta</p>
+       <p>&copy; 2021 Insta-Clone Developed by Tanish Gupta</p>
        </div>
         </div>
 

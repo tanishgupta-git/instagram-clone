@@ -82,7 +82,7 @@ function PostsParent({user,SetopenPop,SethomeClick,Setloading}) {
           <p className='app__postsRight__author'>Friedrich Nietzsche</p>
           <img className='app__postsRight__Usersvg' src={UserOnline} alt=""/>
             <Link to='/addpost'><RiAddCircleLine className='header__popupIcon' /> Add New Post</Link>
-            <p className='app__postsRight__text'>&copy; 2020 InstaClone By Tanish Gupta</p>
+            <p className='app__postsRight__text'>&copy; 2021 InstaClone By Tanish Gupta</p>
           </div>         
           </div>
           </div>
