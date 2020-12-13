@@ -80,7 +80,7 @@ function Posts({user,postId,post}) {
         <div className='post'>
           <div className='post__header'>
           <Link to={`/myProfile/${post.username}/${post.userId}`} ><Avatar className='post__avatar' alt={post.username}  src={ !!postUserImage ? postUserImage:" " } /></Link>
-          <h4><Link to={`/myProfile/${post.username}/${post.userId}`} >{post.username}</Link></h4>
+          <p><Link className='post__user' to={`/myProfile/${post.username}/${post.userId}`} >{post.username}</Link></p>
           </div> 
 
           <img className='post__image' src={post.imageUrl} alt=''/>
@@ -91,8 +91,9 @@ function Posts({user,postId,post}) {
             <Link to={{pathname:`/p/${postId}`,post:post,postUserImage:postUserImage,likes:likes}}><BsChat /></Link>
           </div>
 
-          <h4 className='post__text'><strong>{likes} Likes</strong></h4>
-          <h4 className='post__text'><strong><Link  to={`/myProfile/${post.username}/${post.userId}`} >{post.username}</Link></strong> {post.caption}</h4>
+          <p className='post__likes'>{likes} Likes</p>
+
+          <p className='post__text'><strong><Link  className='post__user' to={`/myProfile/${post.username}/${post.userId}`} >{post.username}</Link></strong> {post.caption}</p>
           
            <div className="post__commentsCount">
               { !commentsCount ? "" : <Link to={{pathname:`/p/${postId}`,post:post,postUserImage:postUserImage}}>View all {commentsCount} comments</Link>}

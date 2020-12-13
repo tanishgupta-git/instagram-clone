@@ -9,7 +9,9 @@ function ImageUpload({props,user,SetopenPop}) {
    const [image,Setimage] = useState(null);
    const [error,Seterror] = useState(null);
    const [progress,Setprogress] = useState(0);
+   const [uploading,Setuploading] = useState(false);
    const types = ['image/png','image/jpeg','image/jpg'];
+
    const handleChange = (e) => {
     let selected = e.target.files[0];
     if(selected && types.includes(selected.type)){
@@ -38,6 +40,7 @@ function ImageUpload({props,user,SetopenPop}) {
               alert(error);
           },
           () => {
+            Setuploading(true);
               storage
               .ref("images")
               .child(image.name)
@@ -67,16 +70,16 @@ function ImageUpload({props,user,SetopenPop}) {
             <label className='imageUpload__label' htmlFor='caption'>Caption:</label>
             <input type='text' id='caption'  onChange={(e)=> Setcaption(e.target.value) }/>
 
-           <p><strong>Choose a file</strong> (click the icon)</p>
+        <p><strong>Choose a file</strong> (click the icon)</p>
 
-           <label className='imageUpload__fileUploader'>
+         <label className='imageUpload__fileUploader'>
            <input type='file' onChange={handleChange} />
            <BsUpload />
            </label> 
-
-            { image && <div>{ image.name }</div> }
+           
+            { image && <div><strong>Selected Image Name</strong> { image.name }</div> }
             { error && <div className="imageUpload__error">{ error }</div>}
-            <button onClick={handleUpload}>Upload</button>
+            <button onClick={handleUpload} disabled={uploading}>Upload</button>
 
         </div>
     )

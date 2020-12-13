@@ -39,7 +39,7 @@
     transition: 0.2s;
 }
 .imageUpload__fileUploader:hover {
-    background-color: wheat;
+    background-color: #cccccc;
 }
 .imageUpload input[type='text']{
     margin:10px 0 30px 0;

@@ -20,13 +20,35 @@
 
 }
 .header__popupParent {
+    display: flex;
+    align-items: center;
     position: relative;
 }
-.header__popupParentIcon {
+.header__avatar {
+  display: inline-block;
+}
+.header__avatarContainer {
+  padding: 2px;
+  border: 1px solid transparent;
+  margin-left: 10px;
+}
+.header__avatarContainerClick {
+  border: 1px solid black;
+  border-radius: 50%;
+}
+.header__avatarContainer div {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+.header__popupParentIcon,.header__avatar {
     font-size: 25px;
-    margin: 0 10px;
+    margin:0 10px;
     cursor: pointer;
     color:#333333;
+  }
+  .header__avatarContainer__avatarClick {
+    border:1px solid black;
   }
 .header__popup {
     display: flex;

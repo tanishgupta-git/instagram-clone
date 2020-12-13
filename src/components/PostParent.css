@@ -7,6 +7,29 @@
     justify-content:space-between;
   }
 
+  .app__postsLeft__noposts {
+    padding: 40px 0;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border:1px solid #cccccc;
+    background-color: white;
+  }
+  .app__postsLeft__noposts svg {
+    margin-right:10px;
+    color: #e6005c;
+    font-size:40px;
+  }
+  .app__postsLeft__noposts__msg {
+    font-weight: 600;
+    font-size:25px;
+    margin: 10px 0;
+  }
+  .app__postsLeft__noposts__muted {
+    color:#8e8e8e;
+  }
   /* styling the right part of parent posts */
   .app__postsLeft{
     width: 65%;
@@ -46,7 +69,7 @@
     width: 250px;
     height: 250px;
     display: block;
-    margin:40px auto 10px auto;
+    margin:50px auto 10px auto;
 }
   .app__postsRight__text {
       color: #b3b3b3;

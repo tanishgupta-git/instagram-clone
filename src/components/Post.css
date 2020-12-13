@@ -16,10 +16,20 @@
     color: #404040;
     cursor: pointer;    
   }
-
-.post__text{
+  .post__text{
     font-weight:normal;
     padding: 10px 10px 0 10px;
+}
+.post__likes{
+    font-size: 17px;
+    padding: 10px 10px 0 10px;
+    font-weight: 600;
+}
+.post__user {
+    font-weight: 600;
+}
+.post__user:hover{
+    text-decoration: underline;
 }
 svg.post-liked{
  color: rgb(237, 73, 86);
@@ -55,7 +65,7 @@ svg.post-liked{
 }
 .post__input{
     flex:1;
-    padding: 10px;
+    padding:20px;
     border:none;
     border-top:1px solid lightgray;
     outline: none;

@@ -4,6 +4,7 @@ import { db} from '../Firebase';
 import {Link} from 'react-router-dom';
 import './PostParent.css';
 import { RiAddCircleLine } from "react-icons/ri";
+import { FaRegCheckCircle } from "react-icons/fa";
 import Spinner from './Spinner';
 import UserOnline from '../static/UserOnline.svg';
 
@@ -11,6 +12,8 @@ function PostsParent({user,SetopenPop,SethomeClick,Setloading}) {
   const [posts,Setposts] = useState([]);
   const [postsLoading,SetpostsLoading] = useState(false);
   const [lastPostfetch,SetlastPostfetch] = useState();
+  const [noPosts,SetnoPosts] = useState(false);
+
       //   fetching the post from firebase
       useEffect(() => {
         // runs every time when post chnages
@@ -20,6 +23,7 @@ function PostsParent({user,SetopenPop,SethomeClick,Setloading}) {
             post:doc.data()
           })))
          SetlastPostfetch(snapshot.docs[snapshot.docs.length - 1]);
+         SetnoPosts(false);
          Setloading(false);
         })
         return () => unsubscribe();
@@ -59,7 +63,10 @@ function PostsParent({user,SetopenPop,SethomeClick,Setloading}) {
         return snapshot;
       })
       .then((snapshot) => {
-        if(!snapshot.docs.length) return;
+        if(!snapshot.docs.length){ 
+          SetnoPosts(true);
+          return;
+        }
        if(!(lastPostfetch.id === snapshot.docs[snapshot.docs.length - 1].id))  SetlastPostfetch(snapshot.docs[snapshot.docs.length -1 ]) })
       .then( () => SetpostsLoading(false)),1500);
     },[postsLoading,lastPostfetch])
@@ -75,14 +82,17 @@ function PostsParent({user,SetopenPop,SethomeClick,Setloading}) {
               )
             })
           }
+          { noPosts && <div className='app__postsLeft__noposts'><FaRegCheckCircle /> 
+          <p className='app__postsLeft__noposts__msg'>You're All Caught Up</p>
+          <p className='app__postsLeft__noposts__muted'>No More Posts</p> </div>}
           { postsLoading && <Spinner />}
           </div>
           <div className='app__postsRight'>
-          <p className='app__postsRight__quote'>" He who has a why  to live can bear almost any how "</p>
-          <p className='app__postsRight__author'>Friedrich Nietzsche</p>
-          <img className='app__postsRight__Usersvg' src={UserOnline} alt=""/>
-            <Link to='/addpost'><RiAddCircleLine className='header__popupIcon' /> Add New Post</Link>
-            <p className='app__postsRight__text'>&copy; 2021 InstaClone By Tanish Gupta</p>
+            <p className='app__postsRight__quote'>" I am lost, So Follow at your own risk "</p>
+            <p className='app__postsRight__author'>Sushant Singh Rajput</p>
+            <img className='app__postsRight__Usersvg' src={UserOnline} alt=""/>
+              <Link to='/addpost'><RiAddCircleLine className='header__popupIcon' /> Add New Post</Link>
+              <p className='app__postsRight__text'>&copy; 2021 InstaClone By Tanish Gupta</p>
           </div>         
           </div>
           </div>

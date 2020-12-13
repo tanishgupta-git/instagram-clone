@@ -21,6 +21,16 @@
 }
 
 /* right side of post comments container */
+.postComments__user {
+    font-weight: 600;
+}
+.postComments__likes {
+    font-size: 17px;
+    font-weight: 600;
+}
+.postComments__user:hover {
+    text-decoration: underline;
+}
 .postCommentsWrapper__container__right{
   width:35%;
   border:1px solid #b3b3b3;
@@ -59,7 +69,17 @@
 /* end of right side part */
 .postCommentsWrapper__container__bottom {
     color:#8e8e8e;
-    margin-top: 30px;
+    margin:20px 0;
 }
 
 /* code for other devices */
+@media screen and (max-width:1020px) {
+   .postCommentsWrapper__container {
+       flex-direction: column;
+       max-width: 600px;
+   } 
+   .postCommentsWrapper__container__left,.postCommentsWrapper__container__right  {
+       width: 100%;
+   }
+}
+ 
