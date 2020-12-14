@@ -4,7 +4,34 @@
     border:1px solid lightgray;
     margin:20px 0 30px 0;
 }
-.post__image{
+.post__imageContainer {
+    position: relative;
+}
+.doubleclick-liked {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 90px;
+    color: white;
+    transform: translate(-50%,-50%);
+    animation:doubleClicked 0.9s ease-in-out 1 forwards;
+}
+@keyframes doubleClicked {
+    0%{
+     transform: translate(-50%,-50%) scale(0.6);
+    }
+    30%{
+      transform:translate(-50%,-50%) scale(1);
+    }
+    70%{
+        transform:translate(-50%,-50%) scale(1);  
+    }
+    100%{
+        transform:translate(-50%,-50%) scale(0);
+    }
+}
+
+.post__imageContainer__img{
     width: 100%;
     object-fit: contain;
     border-top:1px solid lightgray;
@@ -36,6 +63,7 @@ svg.post-liked{
  animation-name:bump;
  animation-duration: 0.2s;
 }
+
 @keyframes bump {
     from {
         transform: scale(1)

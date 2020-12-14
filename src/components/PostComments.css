@@ -8,7 +8,7 @@
     width: 100%;
     display: flex;
     max-width: 1000px;
-    max-height: 700px;
+    max-height: 500px;
     margin:30px auto 0 auto;
 }
 
@@ -18,6 +18,7 @@
 }
 .postCommentsWrapper__container__left img{
   width: 100%;
+  height: 100%;
 }
 
 /* right side of post comments container */
@@ -35,6 +36,7 @@
   width:35%;
   border:1px solid #b3b3b3;
   background-color: white;
+  overflow-y: scroll;
 }
 .postCommentsWrapper__container__right__header {
     padding:10px 20px;
@@ -52,7 +54,6 @@
 }
 .postCommentsWrapper__container__right__comments {
     padding:0 20px 20px 20px;
-    height: 100%;
 }
 .postCommentsWrapper__container__right__comments__heading {
     color: #8e8e8e;
@@ -77,6 +78,7 @@
    .postCommentsWrapper__container {
        flex-direction: column;
        max-width: 600px;
+       max-height:90vh;
    } 
    .postCommentsWrapper__container__left,.postCommentsWrapper__container__right  {
        width: 100%;

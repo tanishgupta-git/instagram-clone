@@ -8,6 +8,7 @@ function ImageUpload({props,user,SetopenPop}) {
    const [caption,Setcaption]  = useState('');
    const [image,Setimage] = useState(null);
    const [error,Seterror] = useState(null);
+   const [userImgurl,Setuserimgurl] = useState('');
    const [progress,Setprogress] = useState(0);
    const [uploading,Setuploading] = useState(false);
    const types = ['image/png','image/jpeg','image/jpg'];
@@ -26,6 +27,16 @@ function ImageUpload({props,user,SetopenPop}) {
    useEffect(() => {
       SetopenPop(false);
    },[SetopenPop])
+
+   useEffect(() => {
+    let unsubscribe = db.collection('users').doc(user.uid).get().then( function(doc) {
+     if (doc.exists) {
+         Setuserimgurl(doc.data().imageUrl);
+     }else{
+         Setuserimgurl("");
+     } 
+     return () => unsubscribe();
+  }) },[user.uid])
    const handleUpload = () => {
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
       uploadTask.on(
@@ -50,6 +61,7 @@ function ImageUpload({props,user,SetopenPop}) {
                       timeStamp:firebase.firestore.FieldValue.serverTimestamp(),
                       caption:caption, 
                       imageUrl:url,
+                      userImgurl:userImgurl,
                       username:user.displayName,
                       userId:user.uid
                   });

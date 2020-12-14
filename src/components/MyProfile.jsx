@@ -11,19 +11,16 @@ function MyProfile({props,SetopenPop,user}) {
         SetopenPop(false);  
     },[SetopenPop])
     useEffect(() => {
-       let unsubscribeOne ;
-       let  unsubscribeTwo;
+      SetisLoading(true);
     //    creating a user document in users collection if it doesn't exits it will initialize it 
-       unsubscribeOne = db.collection('users').doc(props.match.params.userId).get().then(function(doc) {
+       db.collection('users').doc(props.match.params.userId).get().then(function(doc) {
         if (doc.exists) {
             SetuserData(doc.data());
             SetisLoading(false);
-            return () => {
-                unsubscribeOne();
-             };
+         
         } else {
-        // Add a new document in collection users
-            unsubscribeTwo = db.collection("users").doc(props.match.params.userId).set({
+         // Add a new document in collection users
+             db.collection("users").doc(props.match.params.userId).set({
                 username: props.match.params.username,
                 name:"",
                 imageUrl:"",
@@ -38,10 +35,7 @@ function MyProfile({props,SetopenPop,user}) {
             .catch(function(error) {
                 console.error("Error writing document: ", error);
             });
-            return () => {
-                unsubscribeTwo();
-            }
-
+    
         }
     }).catch(function(error) {
         console.log("Error getting user:", error);

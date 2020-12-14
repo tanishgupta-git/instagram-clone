@@ -83,12 +83,15 @@ function Posts({user,postId,post}) {
           <p><Link className='post__user' to={`/myProfile/${post.username}/${post.userId}`} >{post.username}</Link></p>
           </div> 
 
-          <img className='post__image' src={post.imageUrl} alt=''/>
+          <div className='post__imageContainer'>
+          {liked && <BsHeartFill className='doubleclick-liked'/>}
+          <img onDoubleClick={addLiked} className='post__imageContainer__img' src={post.imageUrl} alt=''/>
+          </div>
 
           <div className='post__likeComment'>
             
             { liked ? <BsHeartFill className='post-liked' onClick={removeLiked}/> : <BsHeart onClick={addLiked} /> }
-            <Link to={{pathname:`/p/${postId}`,post:post,postUserImage:postUserImage,likes:likes}}><BsChat /></Link>
+            <Link to={`/p/${postId}`}><BsChat /></Link>
           </div>
 
           <p className='post__likes'>{likes} Likes</p>
@@ -96,7 +99,7 @@ function Posts({user,postId,post}) {
           <p className='post__text'><strong><Link  className='post__user' to={`/myProfile/${post.username}/${post.userId}`} >{post.username}</Link></strong> {post.caption}</p>
           
            <div className="post__commentsCount">
-              { !commentsCount ? "" : <Link to={{pathname:`/p/${postId}`,post:post,postUserImage:postUserImage}}>View all {commentsCount} comments</Link>}
+              { !commentsCount ? "" : <Link to={`/p/${postId}`}>View all {commentsCount} comments</Link>}
            </div>
           
         { user && 

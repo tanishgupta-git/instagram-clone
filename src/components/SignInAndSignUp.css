@@ -18,6 +18,10 @@
     height: 350px;
     margin-top:30px;
 }
+.SignInSignUp__left h1 {
+    font-family: cursive;
+    font-size: 28px;
+}
 .SignInSignUp__right {
     display: flex;
     align-items: center;
@@ -53,6 +57,10 @@
   border: 1px solid #cccccc;
   margin:5px 0;
  border-radius: 3px;
+ outline: none;
+}
+.Sign__form input:focus {
+    border: 1px solid #8e8e8e;
 }
 .Sign__form button {
     background-color: #0095f6;
@@ -101,11 +109,6 @@
     }
 /* media queries for small screen */
 @media screen and (max-width:800px) {
-    .SignInSignUp__left_svg {
-      height: 200px;
-    }
-}
-@media screen and (max-width:650px) {
     .SignInSignUp__left {
         display: none;
     }
