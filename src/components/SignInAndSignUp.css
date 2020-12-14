@@ -12,6 +12,7 @@
 }
 .SignInSignUp__left {
     margin-right: 30px;
+    color: #404040;
 }
 .SignInSignUp__left_svg {
     height: 350px;
@@ -21,16 +22,19 @@
     display: flex;
     align-items: center;
 }
-.Sign__headerImage{
-    object-fit: contain;
-    margin-bottom: 20px;
-  }
 
+.Sign__form___logo {
+    font-family: 'Galada', cursive;
+    font-size:40px;
+    font-weight: 400;
+    margin-bottom: 25px;
+    color: #404040;
+}
 
 /* form parent box */
 .Sign{
     width:350px;
-    padding: 50px 0;
+    padding: 20px 0 50px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -107,3 +111,10 @@
     }
 }
 
+
+@media screen and (max-width:450px) {
+    .Sign {
+        background-color: #fafafa;
+        border: none;
+    }
+}

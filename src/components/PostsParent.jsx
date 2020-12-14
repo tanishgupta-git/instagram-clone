@@ -23,27 +23,29 @@ function PostsParent({user,SetopenPop,SethomeClick,Setloading}) {
             post:doc.data()
           })))
          SetlastPostfetch(snapshot.docs[snapshot.docs.length - 1]);
-         SetnoPosts(false);
          Setloading(false);
         })
         return () => unsubscribe();
       },[Setloading])
+
     // setting the popup to false
     useEffect(() => {
       SetopenPop(false);
     },[SetopenPop])
+
     useEffect(() => {
        SethomeClick(true);
        return () => SethomeClick(false);
     })
+
     // adding the scrolling event
     useEffect( () => {
       window.addEventListener("scroll",isScrolling);
+      SetnoPosts(false);
       return () => window.removeEventListener("scroll",isScrolling);
     },[])
 
     function isScrolling() {
-
       if(document.documentElement.offsetHeight + document.documentElement.scrollTop > document.documentElement.scrollHeight-1 ) {
         SetpostsLoading(true);
       }
@@ -53,7 +55,7 @@ function PostsParent({user,SetopenPop,SethomeClick,Setloading}) {
     useEffect(() => {
 
       if(!postsLoading) return;
-      setTimeout(() => db.collection('posts').orderBy('timeStamp','desc').startAfter(lastPostfetch).limit(3).get().then( snapshot => {
+      setTimeout(() => { if(lastPostfetch) {db.collection('posts').orderBy('timeStamp','desc').startAfter(lastPostfetch).limit(3).get().then( snapshot => {
         if(!snapshot.docs.length) return snapshot;
         if( lastPostfetch.id === snapshot.docs[snapshot.docs.length - 1].id) return snapshot;
         Setposts( prevState => [...prevState,...(snapshot.docs.map( doc => ({
@@ -68,7 +70,7 @@ function PostsParent({user,SetopenPop,SethomeClick,Setloading}) {
           return;
         }
        if(!(lastPostfetch.id === snapshot.docs[snapshot.docs.length - 1].id))  SetlastPostfetch(snapshot.docs[snapshot.docs.length -1 ]) })
-      .then( () => SetpostsLoading(false)),1500);
+      .then( () => SetpostsLoading(false))}},1500);
     },[postsLoading,lastPostfetch])
 
     return (

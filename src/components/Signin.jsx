@@ -23,7 +23,7 @@ function Signin({SetopenSignup}) {
     <div  className='Sign'> 
       <form className='Sign__form'>
         <center>
-        <img className='Sign__headerImage' src='https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png ' alt=''/>
+        <h1 className='Sign__form___logo'>Instagram</h1>
         </center>    
         <input placeholder='Email' className='app__signInput' type='text' value={email} onChange={(e) => Setemail(e.target.value)} />
         <input placeholder='Password' className='app__signInput' type='password' value={password} onChange={(e) => Setpassword(e.target.value)} />

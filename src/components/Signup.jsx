@@ -26,7 +26,7 @@ function Signup({username,Setusername}) {
     <div className='Sign'>
       <form className='Sign__form'>
         <center>
-        <img className='Sign__headerImage' src='https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png ' alt=''/>
+        <h1 className='Sign__form___logo'>Instagram</h1>
         </center>
    
         <input placeholder='Username' className='app__signInput' type='text' value={username} onChange={(e) => Setusername(e.target.value)} />      
@@ -42,4 +42,4 @@ function Signup({username,Setusername}) {
     )
 }
 
-export default Signup;
+export default Signup;  

@@ -85,4 +85,4 @@ function ImageUpload({props,user,SetopenPop}) {
     )
 }
 
-export default ImageUpload
+export default ImageUpload;
