@@ -61,6 +61,15 @@
 .postCommentsWrapper__container__right__comments p {
     margin: 10px 0;
 }
+.postCommentsWrapper__container__right__comments__loadmore {
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+
+}
+.postCommentsWrapper__container__right__comments__loadmore svg {
+    cursor: pointer;
+}
 .postCommentsWrapper__container__right__comments__no {
     display: flex;
     justify-content: center;

@@ -17,6 +17,7 @@ function EditProfile({props,user,SetopenPop}) {
     const [profession,Setprofession] = useState(userData.profession);
     const [email,Setemail] = useState(userData.email);
     const [updating,Setupdating] = useState(false);
+
     const handleChange = (e) => {
       let selected = e.target.files[0];
       console.log(selected);

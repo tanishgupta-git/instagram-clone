@@ -44,9 +44,11 @@ function PostsParent({user,SetopenPop,SethomeClick,Setloading}) {
       SetnoPosts(false);
       return () => window.removeEventListener("scroll",isScrolling);
     },[])
+ 
 
     function isScrolling() {
       if(document.documentElement.offsetHeight + document.documentElement.scrollTop > document.documentElement.scrollHeight-1 ) {
+       
         SetpostsLoading(true);
       }
     }
