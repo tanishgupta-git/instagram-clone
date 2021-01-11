@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import Spinner from './Spinner';
-import { db } from '../Firebase';
+import Spinner from '../Spinner/Spinner';
+import { db } from '../../Firebase';
 import { RiAddCircleLine } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 
@@ -78,9 +78,9 @@ function PostComments({props}) {
         <div className='postCommentsWrapper__container__right'>
         <div className='postCommentsWrapper__container__right__header'>
          <div className='postCommentsWrapper__container__right__header__top'>
-          <Link to={`/myProfile/${post.username}/${post.userId}`} >
+          <Link to={`/profile/${post.username}/${post.userId}`} >
           <Avatar className='post__avatar' alt={post.username}  src={ !!post.userImgurl ? post.userImgurl:" " } /></Link>
-          <p><Link className='postComments__user' to={`/myProfile/${post.username}/${post.userId}`} >{post.username}</Link></p>
+          <p><Link className='postComments__user' to={`/profile/${post.username}/${post.userId}`} >{post.username}</Link></p>
           </div>
           <p>{post.caption}</p>
           <p className='postComments__likes'>{likes} Likes</p>
@@ -91,7 +91,7 @@ function PostComments({props}) {
                <div>
                {comments.map( (comment) => (
                    ( <p key={comment.id} >
-                      <Link className='postComments__user' to={`/myProfile/${comment.data.username}/${comment.data.userId}`} >{comment.data.username}</Link> {comment.data.text}
+                      <Link className='postComments__user' to={`/profile/${comment.data.username}/${comment.data.userId}`} >{comment.data.username}</Link> {comment.data.text}
                     </p>)
               
                 ))}<div className='postCommentsWrapper__container__right__comments__loadmore' >{commentsLoading  ? <Spinner />: ( !noMorecomments &&<RiAddCircleLine onClick={LoadMore}/>) }</div></div> 

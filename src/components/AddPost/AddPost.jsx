@@ -1,10 +1,11 @@
 import React,{useState,useEffect} from 'react'
-import {storage,db} from '../Firebase';
 import firebase from 'firebase';
-import './ImageUpload.css';
+import {storage,db} from '../../Firebase';
 import { RiAddCircleLine } from "react-icons/ri"; 
 import { BsUpload } from "react-icons/bs";
-function ImageUpload({props,user,SetopenPop}) {
+import './AddPost.css';
+
+function AddPost({props,user,SetopenPop}) {
    const [caption,Setcaption]  = useState('');
    const [image,Setimage] = useState(null);
    const [error,Seterror] = useState(null);
@@ -83,7 +84,6 @@ function ImageUpload({props,user,SetopenPop}) {
             <input type='text' id='caption'  onChange={(e)=> Setcaption(e.target.value) }/>
 
         <p><strong>Choose a file</strong> (click the icon)</p>
-
          <label className='imageUpload__fileUploader'>
            <input type='file' onChange={handleChange} />
            <BsUpload />
@@ -97,4 +97,4 @@ function ImageUpload({props,user,SetopenPop}) {
     )
 }
 
-export default ImageUpload;
+export default AddPost;

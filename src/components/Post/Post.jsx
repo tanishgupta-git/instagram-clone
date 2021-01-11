@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import './Post.css';
 import Avatar from '@material-ui/core/Avatar';
-import { db } from '../Firebase';
+import { db } from '../../Firebase';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import { BsHeart,BsHeartFill,BsChat } from "react-icons/bs";
 
-function Posts({user,postId,post}) {
+function Post({user,postId,post}) {
  
   const [commentsCount,SetcommentsCount] = useState();
   const [comment,Setcomment] = useState('');
@@ -79,8 +79,8 @@ function Posts({user,postId,post}) {
     return (
         <div className='post'>
           <div className='post__header'>
-          <Link to={`/myProfile/${post.username}/${post.userId}`} ><Avatar className='post__avatar' alt={post.username}  src={ !!postUserImage ? postUserImage:" " } /></Link>
-          <p><Link className='post__user' to={`/myProfile/${post.username}/${post.userId}`} >{post.username}</Link></p>
+          <Link to={`/profile/${post.username}/${post.userId}`} ><Avatar className='post__avatar' alt={post.username}  src={ !!postUserImage ? postUserImage:" " } /></Link>
+          <p><Link className='post__user' to={`/profile/${post.username}/${post.userId}`} >{post.username}</Link></p>
           </div> 
 
           <div className='post__imageContainer'>
@@ -96,7 +96,7 @@ function Posts({user,postId,post}) {
 
           <p className='post__likes'>{likes} Likes</p>
 
-          <p className='post__text'><strong><Link  className='post__user' to={`/myProfile/${post.username}/${post.userId}`} >{post.username}</Link></strong> {post.caption}</p>
+          <p className='post__text'><strong><Link  className='post__user' to={`/profile/${post.username}/${post.userId}`} >{post.username}</Link></strong> {post.caption}</p>
           
            <div className="post__commentsCount">
               { !commentsCount ? "" : <Link to={`/p/${postId}`}>View all {commentsCount} comments</Link>}
@@ -111,4 +111,4 @@ function Posts({user,postId,post}) {
         </div>
     )
 }
-export default Posts
+export default Post

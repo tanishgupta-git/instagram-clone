@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from 'react';
 import { auth} from './Firebase';
 import { Switch,Route, Redirect } from 'react-router-dom';
-import SignInAndSignUp from './components/SignInAndSignUp';
-import HomePage from './components/HomePage';
+import SignInAndSignUp from './components/SignInAndSignUp/SignInAndSignUp';
+import HomePage from './components/HomePage/HomePage';
 
 function App() {
   

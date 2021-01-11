@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import {storage,db} from '../Firebase';
+import {storage,db} from '../../Firebase';
 import './EditProfile.css';
 
 function EditProfile({props,user,SetopenPop}) {
@@ -53,7 +53,7 @@ function EditProfile({props,user,SetopenPop}) {
                 });
                 Setprogress(0);
                 SetimageUploading(false);
-                props.history.push(`/myprofile/${userData.username}/${props.match.params.userId}`)
+                props.history.push(`/profile/${userData.username}/${props.match.params.userId}`)
             })
         }
       )
@@ -68,7 +68,7 @@ function EditProfile({props,user,SetopenPop}) {
        website:website,
        profession:profession,
        email:email
-     }).then(() => props.history.push(`/myprofile/${userData.username}/${props.match.params.userId}`))
+     }).then(() => props.history.push(`/profile/${userData.username}/${props.match.params.userId}`))
    }
     return (
         <div className='editProfile'>

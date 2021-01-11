@@ -1,12 +1,12 @@
 import React,{useState,useEffect,useRef} from 'react';
-import { db } from '../Firebase';
+import { db } from '../../Firebase';
 import firebase from 'firebase';
 import {Link} from 'react-router-dom';
 import { BsChat } from "react-icons/bs";
-import './Chats.css';
-import Spinner from './Spinner';
+import './ChatRoom.css';
+import Spinner from '../Spinner/Spinner';
 
-function Chats({props,user,SetopenPop,SetchatsClick}) {
+function ChatRoom({props,user,SetopenPop,SetchatsClick}) {
     const [chats,Setchats] = useState([]);
     const [lastfetch,Setlastfetch] = useState();
     const [message,Setmessage] = useState('');
@@ -77,7 +77,7 @@ function Chats({props,user,SetopenPop,SetchatsClick}) {
          </div>):(
              <div key={chat.id} className="chat__otherParent">
              <div  className='chat__other'>
-             <span className='chat__username'><Link to={`/myprofile/${chat.chat.username}/${chat.chat.userId}`}>{chat.chat.username}</Link></span>
+             <span className='chat__username'><Link to={`/profile/${chat.chat.username}/${chat.chat.userId}`}>{chat.chat.username}</Link></span>
               { chat.chat.message}
              </div>
              </div>
@@ -95,4 +95,4 @@ function Chats({props,user,SetopenPop,SetchatsClick}) {
     )
 }
 
-export default Chats;
+export default ChatRoom;

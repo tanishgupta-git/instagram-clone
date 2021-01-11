@@ -1,14 +1,14 @@
 import React,{useState,useEffect} from 'react'
-import Posts from './Posts';
-import { db} from '../Firebase';
+import Post from '../Post/Post';
+import { db} from '../../Firebase';
 import {Link} from 'react-router-dom';
-import './PostParent.css';
 import { RiAddCircleLine } from "react-icons/ri";
 import { FaRegCheckCircle } from "react-icons/fa";
-import Spinner from './Spinner';
-import UserOnline from '../static/UserOnline.svg';
+import Spinner from '../Spinner/Spinner';
+import UserOnline from '../../static/UserOnline.svg';
+import './Posts.css';
 
-function PostsParent({user,SetopenPop,SethomeClick,Setloading}) {
+function Posts({user,SetopenPop,SethomeClick,Setloading}) {
   const [posts,Setposts] = useState([]);
   const [postsLoading,SetpostsLoading] = useState(false);
   const [lastPostfetch,SetlastPostfetch] = useState();
@@ -82,7 +82,7 @@ function PostsParent({user,SetopenPop,SethomeClick,Setloading}) {
           { 
             posts.map( ({id,post}) => {
               return  (
-                <Posts key={id} postId ={id} user={user} post={post} />
+                <Post key={id} postId ={id} user={user} post={post} />
               )
             })
           }
@@ -103,4 +103,4 @@ function PostsParent({user,SetopenPop,SethomeClick,Setloading}) {
     )
 }
 
-export default PostsParent;
+export default Posts;

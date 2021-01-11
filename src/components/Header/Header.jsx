@@ -1,9 +1,8 @@
 import React,{useState,useEffect} from 'react';
-import { auth} from '../Firebase';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import Avatar from '@material-ui/core/Avatar';
-import { db } from '../Firebase';
+import { db,auth } from '../../Firebase';
 import { FaRegUserCircle} from "react-icons/fa";
 import { RiHome2Line,RiHome2Fill,RiAddCircleLine,RiSendPlaneFill,RiSendPlaneLine } from "react-icons/ri";
 
@@ -31,7 +30,7 @@ function Header({user,openPop,SetopenPop,chatsClick,homeClick}) {
               <span className={openPop ?  'header__avatarContainer header__avatarContainerClick' :'header__avatarContainer' } onClick={ 
                 () => SetopenPop( prev => !prev)}><Avatar className='header__avatarContainer__avatar' alt={user.displayName} src={userImg}/> </span>
               { openPop && <div className='header__popup'>
-              <Link to={`/myprofile/${user.displayName}/${user.uid}`} ><FaRegUserCircle className='header__popupIcon'/> My Profile</Link>
+              <Link to={`/profile/${user.displayName}/${user.uid}`} ><FaRegUserCircle className='header__popupIcon'/> My Profile</Link>
               <Link to='/addpost'><RiAddCircleLine className='header__popupIcon' /> Add New Post</Link>
               <span className='header__logout' onClick={() => auth.signOut()}>Logout</span>
               </div> }

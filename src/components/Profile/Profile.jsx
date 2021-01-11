@@ -1,10 +1,10 @@
 import React,{useEffect, useState} from 'react';
-import {db} from '../Firebase';
 import {Link} from 'react-router-dom';
-import  Spinner from './Spinner';
-import './MyProfile.css';
+import './Profile.css';
+import {db} from '../../Firebase';
+import  Spinner from '../Spinner/Spinner';
 
-function MyProfile({props,SetopenPop,user}) {
+function Profile({props,SetopenPop,user}) {
     const [userData,SetuserData] = useState({});
     const [isLoading,SetisLoading] = useState(true);
     useEffect(() => {
@@ -63,4 +63,4 @@ function MyProfile({props,SetopenPop,user}) {
     )
 }
 
-export default MyProfile;
+export default Profile;

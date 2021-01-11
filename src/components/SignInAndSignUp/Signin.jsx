@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { auth} from '../Firebase';
+import { auth} from '../../Firebase';
 import './SignInAndSignUp.css';
 
 function Signin({SetopenSignup}) {

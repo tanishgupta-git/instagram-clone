@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import Signup from './Signup';
 import Signin from './Signin';
 import './SignInAndSignUp.css';
-import SignSvg from '../static/loginsvg.svg';
+import SignSvg from '../../static/loginsvg.svg';
 
 function SignInAndSignUp({username,Setusername}) {
     const [openSignUp,SetopenSignup] = useState(false);
