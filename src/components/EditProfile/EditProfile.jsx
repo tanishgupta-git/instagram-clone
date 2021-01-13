@@ -2,10 +2,11 @@ import React,{useState,useEffect} from 'react';
 import {storage,db} from '../../Firebase';
 import './EditProfile.css';
 
-function EditProfile({props,user,SetopenPop}) {
-    useEffect(() => {
-     SetopenPop(false);
-    },[SetopenPop])
+function EditProfile({props,user,SetopenPop,Setloading}) {
+  useEffect(() => {
+    SetopenPop(false);
+    Setloading(false);
+},[SetopenPop,Setloading])
     const userData = props.location.userData;
     const types = ['image/png','image/jpeg','image/jpg'];
     const [error,Seterror] = useState(null);

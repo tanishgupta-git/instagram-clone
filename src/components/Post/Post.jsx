@@ -111,4 +111,4 @@ function Post({user,postId,post}) {
         </div>
     )
 }
-export default Post
+export default Post;

@@ -7,19 +7,23 @@ import { Link } from 'react-router-dom';
 
 import './PostComments.css';
 
-function PostComments({props}) {
+function PostComments({props,SetopenPop,Setloading}) {
     const [comments,Setcomments] = useState([]);
     const [post,Setpost] = useState();
     const [commentsLoading,SetcommentsLoading] = useState(false);
     const [noMorecomments,SetnoMorecomments] = useState(false);
     const [lastComment,SetlastComment] = useState('');
-    const [loading,Setloading] = useState(false);
+    const [isLoading,SetisLoading] = useState(false);
     const [postsLoading,SetpostsLoading] = useState(true);
     const [likes,Setlikes] = useState(0);
-
+     
+    useEffect(() => {
+      SetopenPop(false);
+      Setloading(false);
+  },[SetopenPop,Setloading])
     // fetching the post comments from firebase database
     useEffect(() => {
-      Setloading(true);
+      SetisLoading(true);
         let unsubscribe;
         setTimeout(() => unsubscribe = db.collection("posts").doc(props.match.params.postId).collection("comments").orderBy('timestamp','desc').limit(10)
         .onSnapshot( (snapshot) => {
@@ -28,10 +32,10 @@ function PostComments({props}) {
           ({ id:doc.id,
             data:doc.data() }) ));
           SetlastComment(snapshot.docs[snapshot.docs.length -1]);
-          Setloading(false);
+          SetisLoading(false);
         }),1500)
         return () => unsubscribe();    
-    },[Setloading,props.match.params.postId]);
+    },[SetisLoading,props.match.params.postId]);
 
     // setting up the likes count from firebase
     useEffect(() => {
@@ -87,7 +91,7 @@ function PostComments({props}) {
           </div>
           <div className='postCommentsWrapper__container__right__comments'>
             <p className='postCommentsWrapper__container__right__comments__heading'>Comments</p>
-            { loading && <Spinner />}
+            { isLoading && <Spinner />}
                <div>
                {comments.map( (comment) => (
                    ( <p key={comment.id} >

@@ -21,9 +21,9 @@ function Header({user,openPop,SetopenPop,chatsClick,homeClick}) {
     return (
         <div className='header'>
           <div className='header__main'>
-            <Link to='/home'><img className='app__headerImage' src='https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png ' alt=''/></Link>
+            <Link to='/'><img className='app__headerImage' src='https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png ' alt=''/></Link>
               <span className='header__popupParent'>
-              <Link to='/home'>{homeClick ?<RiHome2Fill className='header__popupParentIcon' /> :<RiHome2Line className='header__popupParentIcon'/> }</Link>
+              <Link to='/'>{homeClick ?<RiHome2Fill className='header__popupParentIcon' /> :<RiHome2Line className='header__popupParentIcon'/> }</Link>
               <Link to='/chats'>{ chatsClick ? <RiSendPlaneFill className='header__popupParentIcon' /> 
               : <RiSendPlaneLine className='header__popupParentIcon'/>} </Link>
 

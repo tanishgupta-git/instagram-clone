@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react';
 import { auth} from './Firebase';
-import { Switch,Route, Redirect } from 'react-router-dom';
 import SignInAndSignUp from './components/SignInAndSignUp/SignInAndSignUp';
 import HomePage from './components/HomePage/HomePage';
 
@@ -25,11 +24,11 @@ function App() {
 
 
   return (
-    <div className="app" style={{ width:'100%',height:'100%'}}>
-    <Switch>
-    <Route exact path='/signin' render={() => user ? (<Redirect to='/home' />) : (<SignInAndSignUp username={username} Setusername={Setusername} />)}/>
-    <Route  path='/' render={(props) => user ? (<HomePage {...props} user={user} />) : (<Redirect to='/signin' />)} />
-    </Switch> 
+    <div className="app">
+    { user ? 
+    <HomePage user={user} /> 
+    : <SignInAndSignUp username={username} Setusername={Setusername} /> 
+    }      
     </div> 
   );
 }

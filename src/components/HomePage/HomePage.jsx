@@ -22,12 +22,12 @@ function HomePage({props,user}) {
         {loading && <div className='loading'><img src={Loading} alt=''/></div>}
         <Header user={user} openPop={openPop} SetopenPop={SetopenPop} homeClick={homeClick} chatsClick={chatsClick}/>
         <Switch>
-        <Route path='/home' render={ (props) => <Posts {...props} user={user} Setloading={Setloading} SetopenPop={SetopenPop} SethomeClick={SethomeClick} /> } />
-        <Route exact path='/profile/:username/:userId' render={(props) => <Profile props={props} user={user} SetopenPop={SetopenPop} /> } />
-        <Route path='/profile/:username/:userId/edit' render={(props) => <EditProfile props={props} user={user} SetopenPop={SetopenPop} /> } />
-        <Route path='/chats' render={ (props) => <ChatRoom {...props} user={user} SetopenPop={SetopenPop} SetchatsClick={SetchatsClick} /> } />
-        <Route path='/p/:postId' render={ (props) => <PostComments props={props} SetopenPop={SetopenPop} /> } />
-        <Route path='/addpost' render={ (props) => <AddPost  props={props} user={user} SetopenPop={SetopenPop} />} />
+        <Route exact path='/' render={ (props) => <Posts {...props} user={user} Setloading={Setloading} SetopenPop={SetopenPop} SethomeClick={SethomeClick} /> } />
+        <Route exact path='/profile/:username/:userId' render={(props) => <Profile props={props} Setloading={Setloading} user={user} SetopenPop={SetopenPop} /> } />
+        <Route exact path='/profile/:username/:userId/edit' render={(props) => <EditProfile props={props} user={user} Setloading={Setloading} SetopenPop={SetopenPop} /> } />
+        <Route exact path='/chats' render={ (props) => <ChatRoom {...props} user={user} SetopenPop={SetopenPop} Setloading={Setloading} SetchatsClick={SetchatsClick} /> } />
+        <Route exact path='/p/:postId' render={ (props) => <PostComments props={props} Setloading={Setloading} SetopenPop={SetopenPop} /> } />
+        <Route exact path='/addpost' render={ (props) => <AddPost  props={props} user={user} Setloading={Setloading} SetopenPop={SetopenPop} />} />
         </Switch>
         </div>
     )

@@ -5,7 +5,7 @@ import { RiAddCircleLine } from "react-icons/ri";
 import { BsUpload } from "react-icons/bs";
 import './AddPost.css';
 
-function AddPost({props,user,SetopenPop}) {
+function AddPost({props,user,SetopenPop,Setloading}) {
    const [caption,Setcaption]  = useState('');
    const [image,Setimage] = useState(null);
    const [error,Seterror] = useState(null);
@@ -25,10 +25,10 @@ function AddPost({props,user,SetopenPop}) {
     }
    }
 //    setting the popup to false
-   useEffect(() => {
-      SetopenPop(false);
-   },[SetopenPop])
-
+useEffect(() => {
+    SetopenPop(false);
+    Setloading(false);
+},[SetopenPop,Setloading])
    useEffect(() => {
     let unsubscribe = db.collection('users').doc(user.uid).get().then( function(doc) {
      if (doc.exists) {

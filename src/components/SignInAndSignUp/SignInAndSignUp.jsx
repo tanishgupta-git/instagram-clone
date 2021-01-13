@@ -7,6 +7,7 @@ import SignSvg from '../../static/loginsvg.svg';
 function SignInAndSignUp({username,Setusername}) {
     const [openSignUp,SetopenSignup] = useState(false);
     return (
+      <div className='SignInSignUp__Parent'>
         <div className='SignInSignUp'>
     <div className='SignInSignUp__body'>
       <div className='SignInSignUp__left'>
@@ -22,7 +23,7 @@ function SignInAndSignUp({username,Setusername}) {
        <p>&copy; 2021 Insta-Clone Developed by Tanish Gupta</p>
        </div>
         </div>
-
+        </div>
     )
 }
 

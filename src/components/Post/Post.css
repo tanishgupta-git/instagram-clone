@@ -100,6 +100,7 @@ svg.post-liked{
 }
 .post__button{
     flex:0;
+    cursor: pointer;
     border:none;
     border-top:1px solid lightgray;
     color: #6082a3;

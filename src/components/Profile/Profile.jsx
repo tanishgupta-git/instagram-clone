@@ -4,12 +4,13 @@ import './Profile.css';
 import {db} from '../../Firebase';
 import  Spinner from '../Spinner/Spinner';
 
-function Profile({props,SetopenPop,user}) {
+function Profile({props,SetopenPop,user,Setloading}) {
     const [userData,SetuserData] = useState({});
     const [isLoading,SetisLoading] = useState(true);
     useEffect(() => {
-        SetopenPop(false);  
-    },[SetopenPop])
+        SetopenPop(false);
+        Setloading(false);
+    },[SetopenPop,Setloading])
     useEffect(() => {
       SetisLoading(true);
     //    creating a user document in users collection if it doesn't exits it will initialize it 

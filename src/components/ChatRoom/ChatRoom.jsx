@@ -6,7 +6,7 @@ import { BsChat } from "react-icons/bs";
 import './ChatRoom.css';
 import Spinner from '../Spinner/Spinner';
 
-function ChatRoom({props,user,SetopenPop,SetchatsClick}) {
+function ChatRoom({props,user,SetopenPop,SetchatsClick,Setloading}) {
     const [chats,Setchats] = useState([]);
     const [lastfetch,Setlastfetch] = useState();
     const [message,Setmessage] = useState('');
@@ -14,8 +14,9 @@ function ChatRoom({props,user,SetopenPop,SetchatsClick}) {
 
     const refreDiv = useRef();
     useEffect(() => {
-        SetopenPop(false)
-    },[SetopenPop])
+        SetopenPop(false);
+        Setloading(false);
+    },[SetopenPop,Setloading])
     useEffect(() => {
        SetchatsClick(true);
        return () => SetchatsClick(false);
