@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect, useContext} from 'react'
 import Post from '../Post/Post';
 import { db} from '../../Firebase';
 import {Link} from 'react-router-dom';
@@ -7,13 +7,16 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import Spinner from '../Spinner/Spinner';
 import UserOnline from '../../static/UserOnline.svg';
 import './Posts.css';
+import { LoadingContext } from '../../contexts/loadingContext';
+import { PopUpContext } from '../../contexts/PopUpContext';
 
-function Posts({user,SetopenPop,SethomeClick,Setloading}) {
+function Posts({user,SethomeClick}) {
   const [posts,Setposts] = useState([]);
   const [postsLoading,SetpostsLoading] = useState(false);
   const [lastPostfetch,SetlastPostfetch] = useState();
   const [noPosts,SetnoPosts] = useState(false);
-
+  const {Setloading} = useContext(LoadingContext);
+  const {SetopenPop} = useContext(PopUpContext)
       //   fetching the post from firebase
       useEffect(() => {
         // runs every time when post changes

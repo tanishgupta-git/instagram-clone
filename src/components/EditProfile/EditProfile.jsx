@@ -1,9 +1,13 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useContext} from 'react';
 import {storage,db} from '../../Firebase';
 import {withRouter} from 'react-router-dom';
 import './EditProfile.css';
+import { LoadingContext } from '../../contexts/loadingContext';
+import { PopUpContext } from '../../contexts/PopUpContext';
 
-function EditProfile({match,history,location,user,SetopenPop,Setloading}) {
+function EditProfile({match,history,location,user}) {
+  const {Setloading} = useContext(LoadingContext);
+  const {SetopenPop} = useContext(PopUpContext);
   useEffect(() => {
     SetopenPop(false);
     Setloading(false);

@@ -2,6 +2,8 @@ import React,{useState,useEffect} from 'react';
 import { auth} from './Firebase';
 import SignInAndSignUp from './components/SignInAndSignUp/SignInAndSignUp';
 import HomePage from './components/HomePage/HomePage';
+import LoadingContextProvider from './contexts/loadingContext';
+import PopUpContextProvider from './contexts/PopUpContext';
 
 function App() {
   
@@ -26,7 +28,11 @@ function App() {
   return (
     <div className="app">
     { user ? 
-    <HomePage user={user} /> 
+    <PopUpContextProvider>
+    <LoadingContextProvider>
+        <HomePage user={user} />
+      </LoadingContextProvider> 
+         </PopUpContextProvider>
     : <SignInAndSignUp username={username} Setusername={Setusername} /> 
     }      
     </div> 

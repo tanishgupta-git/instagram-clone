@@ -1,13 +1,14 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useContext} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Spinner from '../Spinner/Spinner';
 import { db } from '../../Firebase';
 import { RiAddCircleLine } from "react-icons/ri";
 import { Link } from 'react-router-dom';
-
+import { LoadingContext } from '../../contexts/loadingContext';
+import { PopUpContext } from '../../contexts/PopUpContext';
 import './PostComments.css';
 
-function PostComments({params,match,SetopenPop,Setloading}) {
+function PostComments({params,match}) {
     const [comments,Setcomments] = useState([]);
     const [post,Setpost] = useState();
     const [commentsLoading,SetcommentsLoading] = useState(false);
@@ -16,7 +17,9 @@ function PostComments({params,match,SetopenPop,Setloading}) {
     const [isLoading,SetisLoading] = useState(false);
     const [postsLoading,SetpostsLoading] = useState(true);
     const [likes,Setlikes] = useState(0);
-     
+    const {Setloading} = useContext(LoadingContext);
+    const {SetopenPop} = useContext(PopUpContext);
+
     useEffect(() => {
       SetopenPop(false);
       Setloading(false);

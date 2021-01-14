@@ -1,12 +1,14 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import firebase from 'firebase';
 import {storage,db} from '../../Firebase';
 import { RiAddCircleLine } from "react-icons/ri"; 
 import { BsUpload } from "react-icons/bs";
 import {withRouter} from 'react-router-dom';
+import { LoadingContext } from '../../contexts/loadingContext';
+import { PopUpContext } from '../../contexts/PopUpContext';
 import './AddPost.css';
 
-function AddPost({history,user,SetopenPop,Setloading}) {
+function AddPost({history,user}) {
    const [caption,Setcaption]  = useState('');
    const [image,Setimage] = useState(null);
    const [error,Seterror] = useState(null);
@@ -14,6 +16,8 @@ function AddPost({history,user,SetopenPop,Setloading}) {
    const [progress,Setprogress] = useState(0);
    const [uploading,Setuploading] = useState(false);
    const types = ['image/png','image/jpeg','image/jpg'];
+   const {Setloading} = useContext(LoadingContext);
+   const {SetopenPop} = useContext(PopUpContext);
 
    const handleChange = (e) => {
     let selected = e.target.files[0];

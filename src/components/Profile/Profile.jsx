@@ -1,12 +1,16 @@
-import React,{useEffect, useState} from 'react';
+import React,{useEffect, useState,useContext} from 'react';
 import {Link,withRouter} from 'react-router-dom';
 import './Profile.css';
 import {db} from '../../Firebase';
 import  Spinner from '../Spinner/Spinner';
+import { LoadingContext } from '../../contexts/loadingContext';
+import { PopUpContext } from '../../contexts/PopUpContext';
 
-function Profile({match,history,SetopenPop,user,Setloading}) {
+function Profile({match,history,user}) {
     const [userData,SetuserData] = useState({});
     const [isLoading,SetisLoading] = useState(true);
+    const {Setloading} = useContext(LoadingContext);
+    const {SetopenPop} = useContext(PopUpContext);
     useEffect(() => {
         SetopenPop(false);
         Setloading(false);

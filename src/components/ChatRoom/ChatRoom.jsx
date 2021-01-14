@@ -1,16 +1,20 @@
-import React,{useState,useEffect,useRef} from 'react';
+import React,{useState,useEffect,useRef,useContext} from 'react';
 import { db } from '../../Firebase';
 import firebase from 'firebase';
 import {Link} from 'react-router-dom';
 import { BsChat } from "react-icons/bs";
 import './ChatRoom.css';
 import Spinner from '../Spinner/Spinner';
+import { LoadingContext } from '../../contexts/loadingContext';
+import { PopUpContext } from '../../contexts/PopUpContext';
 
-function ChatRoom({user,SetopenPop,SetchatsClick,Setloading}) {
+function ChatRoom({user,SetchatsClick}) {
     const [chats,Setchats] = useState([]);
     const [lastfetch,Setlastfetch] = useState();
     const [message,Setmessage] = useState('');
     const [isLoading,SetisLoading] = useState(false);
+    const {Setloading} = useContext(LoadingContext);
+    const {SetopenPop} = useContext(PopUpContext);
 
     const refreDiv = useRef();
     useEffect(() => {
