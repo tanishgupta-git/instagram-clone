@@ -16,7 +16,7 @@ function Posts({user,SetopenPop,SethomeClick,Setloading}) {
 
       //   fetching the post from firebase
       useEffect(() => {
-        // runs every time when post chnages
+        // runs every time when post changes
         let unsubscribe=  db.collection('posts').orderBy('timeStamp','desc').limit(3).onSnapshot( snapshot => {
           Setposts(snapshot.docs.map(doc => ({
             id:doc.id,

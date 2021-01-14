@@ -1,10 +1,10 @@
 import React,{useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link,withRouter} from 'react-router-dom';
 import './Profile.css';
 import {db} from '../../Firebase';
 import  Spinner from '../Spinner/Spinner';
 
-function Profile({props,SetopenPop,user,Setloading}) {
+function Profile({match,history,SetopenPop,user,Setloading}) {
     const [userData,SetuserData] = useState({});
     const [isLoading,SetisLoading] = useState(true);
     useEffect(() => {
@@ -14,15 +14,15 @@ function Profile({props,SetopenPop,user,Setloading}) {
     useEffect(() => {
       SetisLoading(true);
     //    creating a user document in users collection if it doesn't exits it will initialize it 
-       db.collection('users').doc(props.match.params.userId).get().then(function(doc) {
+       db.collection('users').doc(match.params.userId).get().then(function(doc) {
         if (doc.exists) {
             SetuserData(doc.data());
             SetisLoading(false);
          
         } else {
          // Add a new document in collection users
-             db.collection("users").doc(props.match.params.userId).set({
-                username: props.match.params.username,
+             db.collection("users").doc(match.params.userId).set({
+                username: match.params.username,
                 name:"",
                 imageUrl:"",
                 bio:"",
@@ -41,7 +41,7 @@ function Profile({props,SetopenPop,user,Setloading}) {
     }).catch(function(error) {
         console.log("Error getting user:", error);
     });
-    },[props.match.params.userId,props.match.params.username])
+    },[match.params.userId,match.params.username])
     return (
         <div className='myProfile'>
         { isLoading ? <Spinner /> :
@@ -49,7 +49,7 @@ function Profile({props,SetopenPop,user,Setloading}) {
           { !!userData.imageUrl ?<div className='myProfile__image'> <img src={userData.imageUrl} alt=""/></div>:<div className='myProfile__noimage'> No Image Yet</div>}
            <div className='myProfile__intro'>
               <p className='myProfile__intro__username'>{userData.username}</p>
-             {user.uid === props.match.params.userId ? <Link className='myProfile__intro__edit' to={{pathname:`${props.history.location.pathname}/edit`,userData:userData}}>Edit Profile</Link> : ""}
+             {user.uid === match.params.userId ? <Link className='myProfile__intro__edit' to={{pathname:`${history.location.pathname}/edit`,userData:userData}}>Edit Profile</Link> : ""}
               <p className='myProfile__intro__name'>{userData.name}</p>
               <p className='myProfile__intro__profession'>{userData.profession}</p>
               <p className='myProfile__intro__bio'>{userData.bio}</p>
@@ -58,10 +58,10 @@ function Profile({props,SetopenPop,user,Setloading}) {
            </div>
            </div>
         }
-         { user.uid === props.match.params.userId ?  <p className='myProfile__intro__updated'>Keep Your Profile Updated So That Visitors Get To Know More About You</p>:"" }
+         { user.uid === match.params.userId ?  <p className='myProfile__intro__updated'>Keep Your Profile Updated So That Visitors Get To Know More About You</p>:"" }
            <p className='myProfile__copyright'>&copy; 2021 InstaClone By Tanish Gupta</p>
         </div>
     )
 }
 
-export default Profile;
+export default withRouter(Profile);

@@ -3,9 +3,10 @@ import firebase from 'firebase';
 import {storage,db} from '../../Firebase';
 import { RiAddCircleLine } from "react-icons/ri"; 
 import { BsUpload } from "react-icons/bs";
+import {withRouter} from 'react-router-dom';
 import './AddPost.css';
 
-function AddPost({props,user,SetopenPop,Setloading}) {
+function AddPost({history,user,SetopenPop,Setloading}) {
    const [caption,Setcaption]  = useState('');
    const [image,Setimage] = useState(null);
    const [error,Seterror] = useState(null);
@@ -69,7 +70,7 @@ useEffect(() => {
                   Setprogress(0);
                   Setcaption(" ");
                   Setimage(null);
-                  props.history.push('/home');
+                  history.push('/home');
               })
           }
       )
@@ -97,4 +98,4 @@ useEffect(() => {
     )
 }
 
-export default AddPost;
+export default withRouter(AddPost);

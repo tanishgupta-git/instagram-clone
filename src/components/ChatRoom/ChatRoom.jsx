@@ -6,7 +6,7 @@ import { BsChat } from "react-icons/bs";
 import './ChatRoom.css';
 import Spinner from '../Spinner/Spinner';
 
-function ChatRoom({props,user,SetopenPop,SetchatsClick,Setloading}) {
+function ChatRoom({user,SetopenPop,SetchatsClick,Setloading}) {
     const [chats,Setchats] = useState([]);
     const [lastfetch,Setlastfetch] = useState();
     const [message,Setmessage] = useState('');

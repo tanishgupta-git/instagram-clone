@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 import './PostComments.css';
 
-function PostComments({props,SetopenPop,Setloading}) {
+function PostComments({params,match,SetopenPop,Setloading}) {
     const [comments,Setcomments] = useState([]);
     const [post,Setpost] = useState();
     const [commentsLoading,SetcommentsLoading] = useState(false);
@@ -25,7 +25,7 @@ function PostComments({props,SetopenPop,Setloading}) {
     useEffect(() => {
       SetisLoading(true);
         let unsubscribe;
-        setTimeout(() => unsubscribe = db.collection("posts").doc(props.match.params.postId).collection("comments").orderBy('timestamp','desc').limit(10)
+        setTimeout(() => unsubscribe = db.collection("posts").doc(match.params.postId).collection("comments").orderBy('timestamp','desc').limit(10)
         .onSnapshot( (snapshot) => {
           if(!snapshot.docs.length) SetnoMorecomments(true);
           Setcomments(snapshot.docs.map( (doc) =>
@@ -35,24 +35,24 @@ function PostComments({props,SetopenPop,Setloading}) {
           SetisLoading(false);
         }),1500)
         return () => unsubscribe();    
-    },[SetisLoading,props.match.params.postId]);
+    },[SetisLoading,match.params.postId]);
 
     // setting up the likes count from firebase
     useEffect(() => {
-       db.collection('posts').doc(props.match.params.postId).collection('likes').get().then( snapshot => Setlikes(snapshot.docs.length))
-    },[props.match.params.postId])
+       db.collection('posts').doc(match.params.postId).collection('likes').get().then( snapshot => Setlikes(snapshot.docs.length))
+    },[match.params.postId])
     useEffect(() => {
       SetpostsLoading(true);
-     db.collection("posts").doc(props.match.params.postId).get().then( function(doc) {
+     db.collection("posts").doc(match.params.postId).get().then( function(doc) {
        Setpost(doc.data());
      }).then( () => SetpostsLoading(false))
 
-    },[props.match.params.postId])
+    },[match.params.postId])
     
     const LoadMore = () => {
       SetnoMorecomments(false);
        SetcommentsLoading(true);
-       db.collection("posts").doc(props.match.params.postId).collection("comments").orderBy('timestamp','desc').startAfter(lastComment).limit(10).get()
+       db.collection("posts").doc(match.params.postId).collection("comments").orderBy('timestamp','desc').startAfter(lastComment).limit(10).get()
        .then( snapshot => {
          if(!snapshot.docs.length) return snapshot;
         if( lastComment.id === snapshot.docs[snapshot.docs.length - 1].id) return snapshot; 

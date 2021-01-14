@@ -1,13 +1,14 @@
 import React,{useState,useEffect} from 'react';
 import {storage,db} from '../../Firebase';
+import {withRouter} from 'react-router-dom';
 import './EditProfile.css';
 
-function EditProfile({props,user,SetopenPop,Setloading}) {
+function EditProfile({match,history,location,user,SetopenPop,Setloading}) {
   useEffect(() => {
     SetopenPop(false);
     Setloading(false);
 },[SetopenPop,Setloading])
-    const userData = props.location.userData;
+    const userData = location.userData;
     const types = ['image/png','image/jpeg','image/jpg'];
     const [error,Seterror] = useState(null);
     const [imageUploading,SetimageUploading] = useState(false);
@@ -54,7 +55,7 @@ function EditProfile({props,user,SetopenPop,Setloading}) {
                 });
                 Setprogress(0);
                 SetimageUploading(false);
-                props.history.push(`/profile/${userData.username}/${props.match.params.userId}`)
+                history.push(`/profile/${userData.username}/${match.params.userId}`)
             })
         }
       )
@@ -69,7 +70,7 @@ function EditProfile({props,user,SetopenPop,Setloading}) {
        website:website,
        profession:profession,
        email:email
-     }).then(() => props.history.push(`/profile/${userData.username}/${props.match.params.userId}`))
+     }).then(() => history.push(`/profile/${userData.username}/${match.params.userId}`))
    }
     return (
         <div className='editProfile'>
@@ -79,10 +80,10 @@ function EditProfile({props,user,SetopenPop,Setloading}) {
            <p className='editProfile__form__error'>{error}</p>
           <div className='editProfile__form__userInfo'>
            <div className='editProfile__form__userInfo__userimage'>
-          { !!props.location.userData.imageUrl ? <img src={props.location.userData.imageUrl} alt=""/> : <span>No Image Yet</span>}
+          { !!location.userData.imageUrl ? <img src={location.userData.imageUrl} alt=""/> : <span>No Image Yet</span>}
           </div>
           <div>
-          <p className='editProfile__form__userInfo__username'>{props.match.params.username}</p>
+          <p className='editProfile__form__userInfo__username'>{match.params.username}</p>
        
         {/* image uploading task */}
      
@@ -136,4 +137,4 @@ function EditProfile({props,user,SetopenPop,Setloading}) {
     )
 }
 
-export default EditProfile;
+export default withRouter(EditProfile);
