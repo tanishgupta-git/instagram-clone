@@ -44,6 +44,10 @@ useEffect(() => {
      return () => unsubscribe();
   }) },[user.uid])
    const handleUpload = () => {
+       if(!image) {
+           Seterror("All Fields Are Required");
+           return;
+       }
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
       uploadTask.on(
           "state_changed",
@@ -86,7 +90,7 @@ useEffect(() => {
             <progress  id='progress' className='imageUpload__progress' value={progress} max="100"/>
 
             <label className='imageUpload__label' htmlFor='caption'>Caption:</label>
-            <input type='text' id='caption'  onChange={(e)=> Setcaption(e.target.value) }/>
+            <input type='text' id='caption'  onChange={(e)=> Setcaption(e.target.value) } required/>
 
         <p><strong>Choose a file</strong> (click the icon)</p>
          <label className='imageUpload__fileUploader'>

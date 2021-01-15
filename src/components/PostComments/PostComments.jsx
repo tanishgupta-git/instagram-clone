@@ -3,7 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Spinner from '../Spinner/Spinner';
 import { db } from '../../Firebase';
 import { RiAddCircleLine } from "react-icons/ri";
-import { Link } from 'react-router-dom';
+import { Link,withRouter} from 'react-router-dom';
 import { LoadingContext } from '../../contexts/loadingContext';
 import { PopUpContext } from '../../contexts/PopUpContext';
 import './PostComments.css';
@@ -112,4 +112,4 @@ function PostComments({params,match}) {
     )
 }
 
-export default PostComments;
+export default withRouter(PostComments);

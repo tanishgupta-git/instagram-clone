@@ -12,6 +12,7 @@ function Post({user,postId,post}) {
   const [comment,Setcomment] = useState('');
   const [likes,Setlikes] = useState(0);
   const [liked,Setliked] =  useState(false);
+  const [doubleClicked,SetdoubleClicked] = useState(false);
   const [postUserImage,SetpostUserImage] = useState("");
 
   useEffect( () => {
@@ -67,15 +68,20 @@ function Post({user,postId,post}) {
     db.collection("posts").doc(postId).collection('likes').doc(user.uid).set({
       userId:user.uid,
       timestamp:firebase.firestore.FieldValue.serverTimestamp()
-    }).then(() =>  Setliked(true))
+    }).then(() =>  { Setliked(true);SetdoubleClicked(false);} )
   }
 
   // function for removing the like from the post 
   const removeLiked = () => {
     db.collection("posts").doc(postId).collection('likes').doc(user.uid).delete()
-    .then( () => Setliked(false))
+    .then( () => { Setliked(false);SetdoubleClicked(false);})
   }
-
+ 
+  // run when user doubleclicked
+  const addDoubleClicked = () => {
+    SetdoubleClicked(true);
+    addLiked();
+  }
     return (
         <div className='post'>
           <div className='post__header'>
@@ -84,8 +90,8 @@ function Post({user,postId,post}) {
           </div> 
 
           <div className='post__imageContainer'>
-          {liked && <BsHeartFill className='doubleclick-liked'/>}
-          <img onDoubleClick={addLiked} className='post__imageContainer__img' src={post.imageUrl} alt=''/>
+          { doubleClicked && <BsHeartFill className='doubleclick-liked'/>}
+          <img onDoubleClick={addDoubleClicked} className='post__imageContainer__img' src={post.imageUrl} alt=''/>
           </div>
 
           <div className='post__likeComment'>

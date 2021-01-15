@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { auth} from './Firebase';
+import { auth } from './Firebase';
 import SignInAndSignUp from './components/SignInAndSignUp/SignInAndSignUp';
 import HomePage from './components/HomePage/HomePage';
 import LoadingContextProvider from './contexts/loadingContext';
@@ -27,11 +27,12 @@ function App() {
 
   return (
     <div className="app">
-    { user ? 
+    {
+       user ? 
     <PopUpContextProvider>
-    <LoadingContextProvider>
-        <HomePage user={user} />
-      </LoadingContextProvider> 
+      <LoadingContextProvider>
+          <HomePage user={user} />
+        </LoadingContextProvider> 
          </PopUpContextProvider>
     : <SignInAndSignUp username={username} Setusername={Setusername} /> 
     }      
