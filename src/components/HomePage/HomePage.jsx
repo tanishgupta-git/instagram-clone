@@ -16,13 +16,12 @@ function HomePage({props,user}) {
     const [homeClick,SethomeClick] = useState(false);
     const [chatsClick,SetchatsClick] = useState(false);
 
-
     return ( 
             <div className='HomePage' style={{width:'100%',height:'100%'}}>
             {loading && <div className='loading'><img src={Loading} alt=''/></div>}
             <Header user={user} homeClick={homeClick} chatsClick={chatsClick}/>
             <Switch>
-            <Route exact path='/' render={ () => <Posts  user={user} SethomeClick={SethomeClick} /> } />
+            <Route exact path='/' render= { () => <Posts  user={user} SethomeClick={SethomeClick} /> } />
             <Route exact path='/profile/:username/:userId' render={() => <Profile user={user} /> } />
             <Route exact path='/profile/:username/:userId/edit' render={() => <EditProfile user={user}/> } />
             <Route exact path='/chats' render={ () => <ChatRoom user={user} SetchatsClick={SetchatsClick} /> } />
