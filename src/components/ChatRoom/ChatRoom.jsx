@@ -1,12 +1,12 @@
 import React,{useState,useEffect,useRef,useContext} from 'react';
 import { db } from '../../Firebase';
 import firebase from 'firebase';
-import {Link} from 'react-router-dom';
 import { BsChat } from "react-icons/bs";
 import './ChatRoom.css';
 import Spinner from '../Spinner/Spinner';
 import { LoadingContext } from '../../contexts/loadingContext';
 import { PopUpContext } from '../../contexts/PopUpContext';
+import Chat from '../Chat/Chat';
 
 function ChatRoom({user,SetchatsClick}) {
     const [chats,Setchats] = useState([]);
@@ -74,19 +74,14 @@ function ChatRoom({user,SetchatsClick}) {
         <div className='chats' ref={refreDiv} onScroll={handleScroll}>
         <h2 className='chats__heading'><BsChat /> Insta-clone Chat Room</h2>
         { isLoading && <Spinner /> }
-         { chats.map( chat => chat.chat.userId === user.uid ? (
-             <div  key={chat.id} className="chat__userParent">
-             <div  className='chat__user'>
-            { chat.chat.message}
-         </div>
-         </div>):(
-             <div key={chat.id} className="chat__otherParent">
-             <div  className='chat__other'>
-             <span className='chat__username'><Link to={`/profile/${chat.chat.username}/${chat.chat.userId}`}>{chat.chat.username}</Link></span>
-              { chat.chat.message}
-             </div>
-             </div>
-         ) )}
+         { chats.map
+         ( 
+             chat => chat.chat.userId === user.uid ? (
+                 <div className='chat__Userparent'><Chat key={chat.id} chat={chat} self/>
+                 </div>)
+         :
+         (<div className='chat__Otherparent'> <Chat key={chat.id} chat={chat}/></div>) 
+         )}
 
         <div className='chat__formparent'>
          <form className='chat__form' onSubmit={handleSubmit} >

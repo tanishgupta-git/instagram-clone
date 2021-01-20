@@ -1,0 +1,23 @@
+.chat{
+ display: inline-flex;
+ flex-direction: column;
+ border-radius: 20px;
+}
+
+.chat__user {
+    padding: 20px;
+    margin: 10px 10px 10px 40px;
+    background-color:  #f2f2f2;
+}
+
+.chat__other {
+    padding: 10px 25px 15px 15px;
+    margin: 10px 40px 10px 10px;
+    border: 1px solid  #d9d9d9;
+}
+
+ .chat__username {
+color:#595959;
+font-size: 15px;
+font-weight: bold;
+}

@@ -19,31 +19,9 @@
     margin:10px 0;
     color:#595959;
 }
-.chat__userParent {
+.chat__Userparent {
     display: flex;
     justify-content: flex-end;
-}
-.chat__user {
-display: inline-flex;
-flex-direction: column;
- background-color:  #f2f2f2;
- padding: 20px;
- margin: 10px 10px 10px 40px;
- border-radius: 20px;
-}
-.chat__other {
- display: inline-flex;
- flex-direction: column;
- border: 1px solid  #d9d9d9;
- padding: 10px 25px 15px 15px;
- margin: 10px 40px 10px 10px;
- border-radius:20px;    
-}
-.chat__username {
-
-color:#595959;
-font-size: 15px;
-font-weight: bold;
 }
 /* styling the form and its parent */
 .chat__formparent {
