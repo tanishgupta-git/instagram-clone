@@ -1,17 +1,16 @@
 import React,{useState,useEffect,useRef,useContext} from 'react';
 import { db } from '../../Firebase';
-import firebase from 'firebase';
 import { BsChat } from "react-icons/bs";
 import './ChatRoom.css';
 import Spinner from '../Spinner/Spinner';
 import { LoadingContext } from '../../contexts/loadingContext';
 import { PopUpContext } from '../../contexts/PopUpContext';
 import Chat from '../Chat/Chat';
+import Chatform from '../Chatform/Chatform';
 
 function ChatRoom({user,SetchatsClick}) {
     const [chats,Setchats] = useState([]);
     const [lastfetch,Setlastfetch] = useState();
-    const [message,Setmessage] = useState('');
     const [isLoading,SetisLoading] = useState(false);
     const {Setloading} = useContext(LoadingContext);
     const {SetopenPop} = useContext(PopUpContext);
@@ -44,15 +43,6 @@ function ChatRoom({user,SetchatsClick}) {
         return ( () => unsubscribe())
     },[])
     
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        db.collection('chats').add({
-          userId:user.uid,
-          username:user.displayName,
-          message:message,
-          timestamp:firebase.firestore.FieldValue.serverTimestamp()
-        }).then( () => Setmessage(''))
-    }
     const handleScroll  = (e) => {
 
      if(e.target.scrollTop === 0) {
@@ -83,13 +73,7 @@ function ChatRoom({user,SetchatsClick}) {
          (<div className='chat__Otherparent'> <Chat key={chat.id} chat={chat}/></div>) 
          )}
 
-        <div className='chat__formparent'>
-         <form className='chat__form' onSubmit={handleSubmit} >
-           <input placeholder='Type a message' onChange={ (e) => Setmessage(e.target.value)} required value={message}/>
-           <button type='submit'><strong>Send</strong></button>
-         </form>
-         </div>
-
+         <Chatform user={user}/>
         </div>
         </div>
     )

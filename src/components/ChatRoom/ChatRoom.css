@@ -23,39 +23,6 @@
     display: flex;
     justify-content: flex-end;
 }
-/* styling the form and its parent */
-.chat__formparent {
-    width: 100%;
-    max-width: 900px;
-    position: fixed;
-    bottom: 0;
-    z-index: 1;
-    padding: 10px 0;
-}
-.chat__form {
-    width: 90%;
-    margin: 0 auto;
-   position: relative;   
-}
-.chat__form input{
- width: 100%;
- padding: 10px 55px 10px 20px;
- outline: none;
- border-radius:20px;
- border: none;
- border: 1px solid #cccccc;
-}
-
-.chat__form button {
-    position: absolute;
-    top:10px;
-    right:10px;
-    background: transparent;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    color: #0099ff;
-}
 
 @media screen and (max-width:900px) {
     .chatsParent {
