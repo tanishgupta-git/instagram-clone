@@ -72,7 +72,7 @@ useEffect(() => {
                       caption:caption, 
                       imageUrl:url,
                       userImgurl:userImgurl,
-                      username:user.displayName,
+                      username:user.username,
                       userId:user.uid
                   });
                   Setprogress(0);

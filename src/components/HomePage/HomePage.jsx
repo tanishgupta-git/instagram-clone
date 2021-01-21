@@ -11,13 +11,13 @@ import './HomePage.css';
 import Loading from '../../static/Loading.gif';
 import {LoadingContext} from '../../contexts/loadingContext';
 
-function HomePage({props,user}) {
+function HomePage({user}) {
     const {loading} = useContext(LoadingContext)
     const [homeClick,SethomeClick] = useState(false);
     const [chatsClick,SetchatsClick] = useState(false);
 
     return ( 
-            <div className='HomePage' style={{width:'100%',height:'100%'}}>
+            <div className='HomePage'>
             {loading && <div className='loading'><img src={Loading} alt=''/></div>}
             <Header user={user} homeClick={homeClick} chatsClick={chatsClick}/>
             <Switch>

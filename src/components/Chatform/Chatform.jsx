@@ -9,10 +9,13 @@ function Chatform({user}) {
         e.preventDefault();
         db.collection('chats').add({
           userId:user.uid,
-          username:user.displayName,
+          username:user.username,
           message:message,
           timestamp:firebase.firestore.FieldValue.serverTimestamp()
-        }).then( () => Setmessage(''))
+        }).then( 
+            () => 
+            Setmessage('')
+            )
     }
     return (
         <div className='chat__formparent'>

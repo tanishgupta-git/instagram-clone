@@ -15,6 +15,7 @@ function Profile({match,history,user}) {
         SetopenPop(false);
         Setloading(false);
     },[SetopenPop,Setloading])
+    
     useEffect(() => {
       SetisLoading(true);
     //    creating a user document in users collection if it doesn't exits it will initialize it 
@@ -23,24 +24,6 @@ function Profile({match,history,user}) {
             SetuserData(doc.data());
             SetisLoading(false);
          
-        } else {
-         // Add a new document in collection users
-             db.collection("users").doc(match.params.userId).set({
-                username: match.params.username,
-                name:"",
-                imageUrl:"",
-                bio:"",
-                website:"",
-                profession:"",
-                email:""
-            })
-            .then(() => {
-            SetisLoading(false);
-            })
-            .catch(function(error) {
-                console.error("Error writing document: ", error);
-            });
-    
         }
     }).catch(function(error) {
         console.log("Error getting user:", error);
@@ -53,7 +36,7 @@ function Profile({match,history,user}) {
           { !!userData.imageUrl ?<div className='myProfile__image'> <img src={userData.imageUrl} alt=""/></div>:<div className='myProfile__noimage'> No Image Yet</div>}
            <div className='myProfile__intro'>
               <p className='myProfile__intro__username'>{userData.username}</p>
-             {user.uid === match.params.userId ? <Link className='myProfile__intro__edit' to={{pathname:`${history.location.pathname}/edit`,userData:userData}}>Edit Profile</Link> : ""}
+             { user.uid === match.params.userId ? <Link className='myProfile__intro__edit' to={{pathname:`${history.location.pathname}/edit`,userData:userData}}>Edit Profile</Link> : ""}
               <p className='myProfile__intro__name'>{userData.name}</p>
               <p className='myProfile__intro__profession'>{userData.profession}</p>
               <p className='myProfile__intro__bio'>{userData.bio}</p>

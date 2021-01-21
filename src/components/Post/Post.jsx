@@ -56,7 +56,7 @@ function Post({user,postId,post}) {
     event.preventDefault();
     db.collection("posts").doc(postId).collection('comments').add({
       text:comment,
-      username:user.displayName,
+      username:user.username,
       userId:user.uid,
       timestamp:firebase.firestore.FieldValue.serverTimestamp()
     });

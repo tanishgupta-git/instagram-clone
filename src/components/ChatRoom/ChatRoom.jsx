@@ -67,11 +67,12 @@ function ChatRoom({user,SetchatsClick}) {
          { chats.map
          ( 
              chat => chat.chat.userId === user.uid ? (
-                 <div className='chat__Userparent'><Chat key={chat.id} chat={chat} self/>
-                 </div>)
+                 <div className='chat__Userparent' key={chat.id} ><Chat chat={chat} self/></div>)
          :
-         (<div className='chat__Otherparent'> <Chat key={chat.id} chat={chat}/></div>) 
-         )}
+         (<div className='chat__Otherparent' key={chat.id}> <Chat chat={chat}/></div>) 
+         )
+         
+         }
 
          <Chatform user={user}/>
         </div>

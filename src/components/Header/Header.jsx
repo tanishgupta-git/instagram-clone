@@ -1,25 +1,14 @@
-import React,{useState,useEffect,useContext} from 'react';
+import React,{useContext} from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import Avatar from '@material-ui/core/Avatar';
-import { db,auth } from '../../Firebase';
+import { auth } from '../../Firebase';
 import { FaRegUserCircle} from "react-icons/fa";
 import { RiHome2Line,RiHome2Fill,RiAddCircleLine,RiSendPlaneFill,RiSendPlaneLine } from "react-icons/ri";
 import { PopUpContext } from '../../contexts/PopUpContext';
 
 function Header({user,chatsClick,homeClick}) {
-  const [userImg,SetuserImg] = useState('');
-  const {openPop,SetopenPop} = useContext(PopUpContext)
-  // fetching the user imageUrl
-  useEffect(() => {
-    db.collection('users').doc(user.uid).onSnapshot(function(doc) {
-     if(doc.exists) {
-      SetuserImg(doc.data().imageUrl);
-     }else {
-       SetuserImg("");
-     }
-  })
-  })
+  const {openPop,SetopenPop} = useContext(PopUpContext);
     return (
         <div className='header'>
           <div className='header__main'>
@@ -30,9 +19,9 @@ function Header({user,chatsClick,homeClick}) {
               : <RiSendPlaneLine className='header__popupParentIcon'/>} </Link>
 
               <span className={openPop ?  'header__avatarContainer header__avatarContainerClick' :'header__avatarContainer' } onClick={ 
-                () => SetopenPop( prev => !prev)}><Avatar className='header__avatarContainer__avatar' alt={user.displayName} src={userImg}/> </span>
+                () => SetopenPop( prev => !prev)}><Avatar className='header__avatarContainer__avatar' alt={user.username} src={user.imageUrl}/> </span>
               { openPop && <div className='header__popup'>
-              <Link to={`/profile/${user.displayName}/${user.uid}`} ><FaRegUserCircle className='header__popupIcon'/> My Profile</Link>
+              <Link to={`/profile/${user.username}/${user.uid}`} ><FaRegUserCircle className='header__popupIcon'/> My Profile</Link>
               <Link to='/addpost'><RiAddCircleLine className='header__popupIcon' /> Add New Post</Link>
               <span className='header__logout' onClick={() => auth.signOut()}>Logout</span>
               </div> }
