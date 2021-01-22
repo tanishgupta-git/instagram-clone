@@ -19,7 +19,7 @@ function Header({user,chatsClick,homeClick}) {
               : <RiSendPlaneLine className='header__popupParentIcon'/>} </Link>
 
               <span className={openPop ?  'header__avatarContainer header__avatarContainerClick' :'header__avatarContainer' } onClick={ 
-                () => SetopenPop( prev => !prev)}><Avatar className='header__avatarContainer__avatar' alt={user.username} src={user.imageUrl}/> </span>
+                () => SetopenPop( prev => !prev)}><Avatar className='header__avatarContainer__avatar' alt={user.username} src={user.imageUrl === "" ? " " : user.imageUrl}/> </span>
               { openPop && <div className='header__popup'>
               <Link to={`/profile/${user.username}/${user.uid}`} ><FaRegUserCircle className='header__popupIcon'/> My Profile</Link>
               <Link to='/addpost'><RiAddCircleLine className='header__popupIcon' /> Add New Post</Link>

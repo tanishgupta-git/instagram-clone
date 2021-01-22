@@ -2,7 +2,8 @@ import React,{useState} from 'react'
 import { auth} from '../../Firebase';
 import './SignInAndSignUp.css';
 
-function Signup({username,Setusername}) {
+function Signup() {
+  const [username,Setusername] = useState("");
     const [email,Setemail] = useState("");
     const [password,Setpassword] = useState("");
     const [error,Seterror] = useState("");

@@ -8,17 +8,18 @@ import PopUpContextProvider from './contexts/PopUpContext';
 function App() {
   
   const [user,Setuser] = useState(null);
-  const [username,Setusername] = useState("");
   //  fetching the user from firebase
   useEffect( () => {
     const unsubscribe =  auth.onAuthStateChanged(async (authUser) => {
      
       if(authUser){
-       const userRef = await createUserProfileDocument(authUser);
-       
+
+       const userRef = await createUserProfileDocument(authUser);  
+
        userRef.onSnapshot( snapshot => {
          Setuser(snapshot.data());
        })
+       
      }
      else{
       Setuser(null);
@@ -29,7 +30,7 @@ function App() {
       unsubscribe();
     }
 
-  },[user,username]);
+  },[user]);
 
 
   return (
@@ -41,7 +42,8 @@ function App() {
           <HomePage user={user} />
         </LoadingContextProvider> 
          </PopUpContextProvider>
-    : <SignInAndSignUp username={username} Setusername={Setusername} /> 
+    : 
+    <SignInAndSignUp /> 
     }      
     </div> 
   );

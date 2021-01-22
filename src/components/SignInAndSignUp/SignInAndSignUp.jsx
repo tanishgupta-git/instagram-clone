@@ -4,7 +4,7 @@ import Signin from './Signin';
 import './SignInAndSignUp.css';
 import SignSvg from '../../static/loginsvg.svg';
 
-function SignInAndSignUp({username,Setusername}) {
+function SignInAndSignUp() {
     const [openSignUp,SetopenSignup] = useState(false);
     return (
       <div className='SignInSignUp__Parent'>
@@ -16,7 +16,7 @@ function SignInAndSignUp({username,Setusername}) {
         </div>
     <div className='SignInSignUp__right'> 
     { openSignUp ? 
-      ( <Signup  username={username} Setusername={Setusername} />) : (<Signin SetopenSignup={SetopenSignup} />) }
+      ( <Signup />) : (<Signin SetopenSignup={SetopenSignup} />) }
       </div> 
       </div>
     <div className='SignInSignUp__fotter'>
