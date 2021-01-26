@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import './Post.css';
 import Avatar from '@material-ui/core/Avatar';
 import { db } from '../../firebase/Firebase';
@@ -117,4 +118,8 @@ function Post({user,postId,post}) {
         </div>
     )
 }
-export default Post;
+
+const mapStateToProps = (state) => ({
+  user : state.user.user
+})
+export default connect(mapStateToProps)(Post);

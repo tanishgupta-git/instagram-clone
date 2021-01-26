@@ -1,4 +1,5 @@
 import React,{useState,useEffect,useRef,useContext} from 'react';
+import { connect } from 'react-redux';
 import { db } from '../../firebase/Firebase';
 import { BsChat } from "react-icons/bs";
 import './ChatRoom.css';
@@ -74,10 +75,14 @@ function ChatRoom({user,SetchatsClick}) {
          
          }
 
-         <Chatform user={user}/>
+         <Chatform />
         </div>
         </div>
     )
 }
 
-export default ChatRoom;
+const mapStateToProps = (state) => ({
+    user : state.user.user
+  })
+
+export default connect(mapStateToProps)(ChatRoom);

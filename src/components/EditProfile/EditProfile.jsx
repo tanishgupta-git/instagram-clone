@@ -1,4 +1,5 @@
 import React,{useState,useEffect,useContext} from 'react';
+import { connect } from 'react-redux';
 import {storage,db} from '../../firebase/Firebase';
 import {withRouter} from 'react-router-dom';
 import './EditProfile.css';
@@ -141,4 +142,8 @@ function EditProfile({match,history,location,user}) {
     )
 }
 
-export default withRouter(EditProfile);
+const mapStateToProps = (state) => ({
+  user : state.user.user
+})
+
+export default connect(mapStateToProps)(withRouter(EditProfile));

@@ -1,4 +1,5 @@
-import React,{useState,useEffect,useContext} from 'react'
+import React,{useState,useEffect,useContext} from 'react';
+import { connect } from 'react-redux';
 import firebase from 'firebase';
 import {storage,db} from '../../firebase/Firebase';
 import { RiAddCircleLine } from "react-icons/ri"; 
@@ -105,4 +106,9 @@ useEffect(() => {
         </div>
     )
 }
-export default withRouter(AddPost);
+
+const mapStateToProps = (state) => ({
+    user : state.user.user
+  })
+
+export default connect(mapStateToProps)(withRouter(AddPost));

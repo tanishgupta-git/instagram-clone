@@ -1,4 +1,5 @@
-import React,{useState} from 'react'
+import React,{useState} from 'react';
+import { connect } from 'react-redux';
 import { db } from '../../firebase/Firebase';
 import firebase from 'firebase';
 import './Chatform.css';
@@ -27,4 +28,8 @@ function Chatform({user}) {
     )
 }
 
-export default Chatform;
+const mapStateToProps = (state) => ({
+  user : state.user.user
+})
+
+export default connect(mapStateToProps)(Chatform);

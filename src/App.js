@@ -40,7 +40,7 @@ function App({user,setUser}) {
        user ? 
     <PopUpContextProvider>
       <LoadingContextProvider>
-          <HomePage user={user} />
+          <HomePage />
         </LoadingContextProvider> 
          </PopUpContextProvider>
     : 

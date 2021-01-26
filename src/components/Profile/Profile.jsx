@@ -1,4 +1,5 @@
 import React,{useEffect, useState,useContext} from 'react';
+import { connect } from 'react-redux';
 import {Link,withRouter} from 'react-router-dom';
 import './Profile.css';
 import {db} from '../../firebase/Firebase';
@@ -51,4 +52,8 @@ function Profile({match,history,user}) {
     )
 }
 
-export default withRouter(Profile);
+const mapStateToProps = (state) => ({
+    user : state.user.user
+  })
+
+export default connect(mapStateToProps)(withRouter(Profile));
