@@ -1,13 +1,14 @@
-import React,{useState,useEffect} from 'react';
-import { auth, createUserProfileDocument } from './Firebase';
+import React,{useEffect} from 'react';
+import { auth, createUserProfileDocument } from './firebase/Firebase';
+import { connect } from 'react-redux';
 import SignInAndSignUp from './components/SignInAndSignUp/SignInAndSignUp';
 import HomePage from './components/HomePage/HomePage';
 import LoadingContextProvider from './contexts/loadingContext';
 import PopUpContextProvider from './contexts/PopUpContext';
+import { setUser } from './redux/user/user.actions';
 
-function App() {
+function App({user,setUser}) {
   
-  const [user,Setuser] = useState(null);
   //  fetching the user from firebase
   useEffect( () => {
     const unsubscribe =  auth.onAuthStateChanged(async (authUser) => {
@@ -17,12 +18,12 @@ function App() {
        const userRef = await createUserProfileDocument(authUser);  
 
        userRef.onSnapshot( snapshot => {
-         Setuser(snapshot.data());
+         setUser(snapshot.data());
        })
        
      }
      else{
-      Setuser(null);
+      setUser(null);
      }
 
     })
@@ -30,7 +31,7 @@ function App() {
       unsubscribe();
     }
 
-  },[user]);
+  },[setUser]);
 
 
   return (
@@ -48,4 +49,11 @@ function App() {
     </div> 
   );
 }
-export default App;
+
+const mapStateToProps = state => ({
+  user : state.user.user
+})
+const mapDispatchToProps = dispatch => ({
+  setUser : user => dispatch(setUser(user))
+})
+export default connect(mapStateToProps,mapDispatchToProps)(App);

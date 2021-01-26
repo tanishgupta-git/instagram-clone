@@ -19,7 +19,7 @@ function HomePage({user}) {
     return ( 
             <div className='HomePage'>
             {loading && <div className='loading'><img src={Loading} alt=''/></div>}
-            <Header user={user} homeClick={homeClick} chatsClick={chatsClick}/>
+            <Header homeClick={homeClick} chatsClick={chatsClick}/>
             <Switch>
             <Route exact path='/' render= { () => <Posts  user={user} SethomeClick={SethomeClick} /> } />
             <Route exact path='/profile/:username/:userId' render={() => <Profile user={user} /> } />

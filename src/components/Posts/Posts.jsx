@@ -1,6 +1,6 @@
 import React,{useState,useEffect, useContext} from 'react'
 import Post from '../Post/Post';
-import { db} from '../../Firebase';
+import { db} from '../../firebase/Firebase';
 import {Link} from 'react-router-dom';
 import { RiAddCircleLine } from "react-icons/ri";
 import { FaRegCheckCircle } from "react-icons/fa";

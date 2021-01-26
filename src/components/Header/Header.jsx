@@ -1,8 +1,9 @@
 import React,{useContext} from 'react';
+import  { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import Avatar from '@material-ui/core/Avatar';
-import { auth } from '../../Firebase';
+import { auth } from '../../firebase/Firebase';
 import { FaRegUserCircle} from "react-icons/fa";
 import { RiHome2Line,RiHome2Fill,RiAddCircleLine,RiSendPlaneFill,RiSendPlaneLine } from "react-icons/ri";
 import { PopUpContext } from '../../contexts/PopUpContext';
@@ -31,4 +32,7 @@ function Header({user,chatsClick,homeClick}) {
     )
 }
 
-export default Header;
+const mapStateToProps = state => ({
+   user : state.user.user
+})
+export default connect(mapStateToProps)(Header);

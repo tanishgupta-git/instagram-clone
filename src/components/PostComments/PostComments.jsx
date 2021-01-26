@@ -1,7 +1,7 @@
 import React,{useState,useEffect,useContext} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Spinner from '../Spinner/Spinner';
-import { db } from '../../Firebase';
+import { db } from '../../firebase/Firebase';
 import { RiAddCircleLine } from "react-icons/ri";
 import { Link,withRouter} from 'react-router-dom';
 import { LoadingContext } from '../../contexts/loadingContext';

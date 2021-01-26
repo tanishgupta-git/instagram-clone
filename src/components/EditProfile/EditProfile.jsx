@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useContext} from 'react';
-import {storage,db} from '../../Firebase';
+import {storage,db} from '../../firebase/Firebase';
 import {withRouter} from 'react-router-dom';
 import './EditProfile.css';
 import { LoadingContext } from '../../contexts/loadingContext';

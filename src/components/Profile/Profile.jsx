@@ -1,7 +1,7 @@
 import React,{useEffect, useState,useContext} from 'react';
 import {Link,withRouter} from 'react-router-dom';
 import './Profile.css';
-import {db} from '../../Firebase';
+import {db} from '../../firebase/Firebase';
 import  Spinner from '../Spinner/Spinner';
 import { LoadingContext } from '../../contexts/loadingContext';
 import { PopUpContext } from '../../contexts/PopUpContext';

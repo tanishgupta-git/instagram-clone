@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Post.css';
 import Avatar from '@material-ui/core/Avatar';
-import { db } from '../../Firebase';
+import { db } from '../../firebase/Firebase';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import { BsHeart,BsHeartFill,BsChat } from "react-icons/bs";

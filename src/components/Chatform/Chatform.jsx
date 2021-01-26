@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { db } from '../../Firebase';
+import { db } from '../../firebase/Firebase';
 import firebase from 'firebase';
 import './Chatform.css';
 

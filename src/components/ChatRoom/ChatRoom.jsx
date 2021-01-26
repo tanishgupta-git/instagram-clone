@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useRef,useContext} from 'react';
-import { db } from '../../Firebase';
+import { db } from '../../firebase/Firebase';
 import { BsChat } from "react-icons/bs";
 import './ChatRoom.css';
 import Spinner from '../Spinner/Spinner';

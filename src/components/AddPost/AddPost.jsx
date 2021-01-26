@@ -1,6 +1,6 @@
 import React,{useState,useEffect,useContext} from 'react'
 import firebase from 'firebase';
-import {storage,db} from '../../Firebase';
+import {storage,db} from '../../firebase/Firebase';
 import { RiAddCircleLine } from "react-icons/ri"; 
 import { BsUpload } from "react-icons/bs";
 import {withRouter} from 'react-router-dom';
@@ -105,5 +105,4 @@ useEffect(() => {
         </div>
     )
 }
-
 export default withRouter(AddPost);
