@@ -7,6 +7,8 @@ import { auth } from '../../firebase/Firebase';
 import { FaRegUserCircle} from "react-icons/fa";
 import { RiHome2Line,RiHome2Fill,RiAddCircleLine,RiSendPlaneFill,RiSendPlaneLine } from "react-icons/ri";
 import { PopUpContext } from '../../contexts/PopUpContext';
+import { createStructuredSelector } from 'reselect';
+import { userSelector } from '../../redux/user/user.selectors';
 
 function Header({user,chatsClick,homeClick}) {
   const {openPop,SetopenPop} = useContext(PopUpContext);
@@ -32,7 +34,7 @@ function Header({user,chatsClick,homeClick}) {
     )
 }
 
-const mapStateToProps = state => ({
-   user : state.user.user
+const mapStateToProps = createStructuredSelector({
+  user : userSelector
 })
 export default connect(mapStateToProps)(Header);

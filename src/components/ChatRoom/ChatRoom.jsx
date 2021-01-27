@@ -8,6 +8,8 @@ import { LoadingContext } from '../../contexts/loadingContext';
 import { PopUpContext } from '../../contexts/PopUpContext';
 import Chat from '../Chat/Chat';
 import Chatform from '../Chatform/Chatform';
+import { createStructuredSelector } from 'reselect';
+import { userSelector } from '../../redux/user/user.selectors';
 
 function ChatRoom({user,SetchatsClick}) {
     const [chats,Setchats] = useState([]);
@@ -81,8 +83,7 @@ function ChatRoom({user,SetchatsClick}) {
     )
 }
 
-const mapStateToProps = (state) => ({
-    user : state.user.user
+const mapStateToProps = createStructuredSelector({
+    user : userSelector
   })
-
 export default connect(mapStateToProps)(ChatRoom);

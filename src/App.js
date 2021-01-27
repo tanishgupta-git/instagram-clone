@@ -6,6 +6,8 @@ import HomePage from './components/HomePage/HomePage';
 import LoadingContextProvider from './contexts/loadingContext';
 import PopUpContextProvider from './contexts/PopUpContext';
 import { setUser } from './redux/user/user.actions';
+import { createStructuredSelector } from 'reselect';
+import { userSelector } from './redux/user/user.selectors';
 
 function App({user,setUser}) {
   
@@ -50,8 +52,8 @@ function App({user,setUser}) {
   );
 }
 
-const mapStateToProps = state => ({
-  user : state.user.user
+const mapStateToProps = createStructuredSelector({
+  user : userSelector
 })
 const mapDispatchToProps = dispatch => ({
   setUser : user => dispatch(setUser(user))

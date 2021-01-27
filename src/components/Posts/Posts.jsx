@@ -10,7 +10,7 @@ import './Posts.css';
 import { LoadingContext } from '../../contexts/loadingContext';
 import { PopUpContext } from '../../contexts/PopUpContext';
 
-function Posts({user,SethomeClick}) {
+function Posts({SethomeClick}) {
   const [posts,Setposts] = useState([]);
   const [postsLoading,SetpostsLoading] = useState(false);
   const [lastPostfetch,SetlastPostfetch] = useState();
@@ -85,7 +85,7 @@ function Posts({user,SethomeClick}) {
           { 
             posts.map( ({id,post}) => {
               return  (
-                <Post key={id} postId ={id} user={user} post={post} />
+                <Post key={id} postId ={id} post={post} />
               )
             })
           }

@@ -5,6 +5,8 @@ import {withRouter} from 'react-router-dom';
 import './EditProfile.css';
 import { LoadingContext } from '../../contexts/loadingContext';
 import { PopUpContext } from '../../contexts/PopUpContext';
+import { createStructuredSelector } from 'reselect';
+import { userSelector } from '../../redux/user/user.selectors';
 
 function EditProfile({match,history,location,user}) {
   const {Setloading} = useContext(LoadingContext);
@@ -142,8 +144,8 @@ function EditProfile({match,history,location,user}) {
     )
 }
 
-const mapStateToProps = (state) => ({
-  user : state.user.user
+const mapStateToProps = createStructuredSelector({
+  user : userSelector
 })
 
-export default connect(mapStateToProps)(withRouter(EditProfile));
+export default withRouter(connect(mapStateToProps)(EditProfile));

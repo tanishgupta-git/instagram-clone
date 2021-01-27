@@ -6,6 +6,8 @@ import {db} from '../../firebase/Firebase';
 import  Spinner from '../Spinner/Spinner';
 import { LoadingContext } from '../../contexts/loadingContext';
 import { PopUpContext } from '../../contexts/PopUpContext';
+import { createStructuredSelector } from 'reselect';
+import { userSelector } from '../../redux/user/user.selectors';
 
 function Profile({match,history,user}) {
     const [userData,SetuserData] = useState({});
@@ -52,8 +54,8 @@ function Profile({match,history,user}) {
     )
 }
 
-const mapStateToProps = (state) => ({
-    user : state.user.user
-  })
+const mapStateToProps = createStructuredSelector({
+  user : userSelector
+})
 
-export default connect(mapStateToProps)(withRouter(Profile));
+export default withRouter(connect(mapStateToProps)(Profile));

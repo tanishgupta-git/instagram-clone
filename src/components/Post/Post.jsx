@@ -6,6 +6,8 @@ import { db } from '../../firebase/Firebase';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import { BsHeart,BsHeartFill,BsChat } from "react-icons/bs";
+import { createStructuredSelector } from 'reselect';
+import { userSelector } from '../../redux/user/user.selectors';
 
 function Post({user,postId,post}) {
  
@@ -119,7 +121,8 @@ function Post({user,postId,post}) {
     )
 }
 
-const mapStateToProps = (state) => ({
-  user : state.user.user
+const mapStateToProps = createStructuredSelector({
+  user : userSelector
 })
+
 export default connect(mapStateToProps)(Post);

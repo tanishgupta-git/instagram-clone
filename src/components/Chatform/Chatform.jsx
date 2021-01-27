@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { db } from '../../firebase/Firebase';
 import firebase from 'firebase';
 import './Chatform.css';
+import { createStructuredSelector } from 'reselect';
+import { userSelector } from '../../redux/user/user.selectors';
 
 function Chatform({user}) {
     const [message,Setmessage] = useState('');
@@ -28,8 +30,8 @@ function Chatform({user}) {
     )
 }
 
-const mapStateToProps = (state) => ({
-  user : state.user.user
+const mapStateToProps = createStructuredSelector({
+  user : userSelector
 })
 
 export default connect(mapStateToProps)(Chatform);

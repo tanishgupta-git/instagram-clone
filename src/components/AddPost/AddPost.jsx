@@ -8,6 +8,8 @@ import {withRouter} from 'react-router-dom';
 import { LoadingContext } from '../../contexts/loadingContext';
 import { PopUpContext } from '../../contexts/PopUpContext';
 import './AddPost.css';
+import { createStructuredSelector } from 'reselect';
+import { userSelector } from '../../redux/user/user.selectors';
 
 function AddPost({history,user}) {
    const [caption,Setcaption]  = useState('');
@@ -106,9 +108,7 @@ useEffect(() => {
         </div>
     )
 }
-
-const mapStateToProps = (state) => ({
-    user : state.user.user
+const mapStateToProps = createStructuredSelector({
+    user : userSelector
   })
-
-export default connect(mapStateToProps)(withRouter(AddPost));
+export default withRouter(connect(mapStateToProps)(AddPost));
