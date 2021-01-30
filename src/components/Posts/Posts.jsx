@@ -1,4 +1,5 @@
-import React,{useState,useEffect, useContext} from 'react'
+import React,{useState,useEffect} from 'react';
+import { connect } from 'react-redux';
 import Post from '../Post/Post';
 import { db} from '../../firebase/Firebase';
 import {Link} from 'react-router-dom';
@@ -7,16 +8,15 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import Spinner from '../Spinner/Spinner';
 import UserOnline from '../../static/UserOnline.svg';
 import './Posts.css';
-import { LoadingContext } from '../../contexts/loadingContext';
-import { PopUpContext } from '../../contexts/PopUpContext';
+import { setLoading } from '../../redux/loading/loading.actions.js'
+import { setHidePopup } from '../../redux/hidePopup/hidePopup.actions.js';
 
-function Posts({SethomeClick}) {
+function Posts({setLoading,setHidePopup,SethomeClick}) {
   const [posts,Setposts] = useState([]);
   const [postsLoading,SetpostsLoading] = useState(false);
   const [lastPostfetch,SetlastPostfetch] = useState();
   const [noPosts,SetnoPosts] = useState(false);
-  const {Setloading} = useContext(LoadingContext);
-  const {SetopenPop} = useContext(PopUpContext)
+
       //   fetching the post from firebase
       useEffect(() => {
         // runs every time when post changes
@@ -26,15 +26,15 @@ function Posts({SethomeClick}) {
             post:doc.data()
           })))
          SetlastPostfetch(snapshot.docs[snapshot.docs.length - 1]);
-         Setloading(false);
+         setLoading();
         })
         return () => unsubscribe();
-      },[Setloading])
+      },[setLoading])
 
     // setting the popup to false
     useEffect(() => {
-      SetopenPop(false);
-    },[SetopenPop])
+      setHidePopup(false);
+    },[setHidePopup])
 
     useEffect(() => {
        SethomeClick(true);
@@ -50,9 +50,8 @@ function Posts({SethomeClick}) {
  
 
     function isScrolling() {
-      if(document.documentElement.offsetHeight + document.documentElement.scrollTop > document.documentElement.scrollHeight-1 ) {
-       
-        SetpostsLoading(true);
+      if(document.documentElement.offsetHeight + document.documentElement.scrollTop > document.documentElement.scrollHeight - 3 ) {  
+         SetpostsLoading(true);
       }
     }
 
@@ -92,7 +91,7 @@ function Posts({SethomeClick}) {
           { noPosts && <div className='app__postsLeft__noposts'><FaRegCheckCircle /> 
           <p className='app__postsLeft__noposts__msg'>You're All Caught Up</p>
           <p className='app__postsLeft__noposts__muted'>No More Posts</p> </div>}
-          { postsLoading && <Spinner />}
+          { postsLoading && <Spinner/>}
           </div>
           <div className='app__postsRight'>
             <p className='app__postsRight__quote'>" I am lost, So Follow at your own risk "</p>
@@ -106,4 +105,9 @@ function Posts({SethomeClick}) {
     )
 }
 
-export default Posts;
+const mapDispatchToProps = dispatch => ({
+  setLoading : () => dispatch(setLoading()),
+  setHidePopup : userCond => dispatch(setHidePopup(userCond))
+})
+
+export default connect(null,mapDispatchToProps)(Posts);

@@ -1,14 +1,15 @@
-import React,{useState,useEffect,useContext} from 'react';
+import React,{useState,useEffect} from 'react';
+import { connect } from 'react-redux';
 import Avatar from '@material-ui/core/Avatar';
 import Spinner from '../Spinner/Spinner';
 import { db } from '../../firebase/Firebase';
 import { RiAddCircleLine } from "react-icons/ri";
 import { Link,withRouter} from 'react-router-dom';
-import { LoadingContext } from '../../contexts/loadingContext';
-import { PopUpContext } from '../../contexts/PopUpContext';
+import { setLoading } from '../../redux/loading/loading.actions.js';
 import './PostComments.css';
+import { setHidePopup } from '../../redux/hidePopup/hidePopup.actions.js';
 
-function PostComments({params,match}) {
+function PostComments({setLoading,setHidePopup,params,match}) {
     const [comments,Setcomments] = useState([]);
     const [post,Setpost] = useState();
     const [commentsLoading,SetcommentsLoading] = useState(false);
@@ -17,13 +18,11 @@ function PostComments({params,match}) {
     const [isLoading,SetisLoading] = useState(false);
     const [postsLoading,SetpostsLoading] = useState(true);
     const [likes,Setlikes] = useState(0);
-    const {Setloading} = useContext(LoadingContext);
-    const {SetopenPop} = useContext(PopUpContext);
 
     useEffect(() => {
-      SetopenPop(false);
-      Setloading(false);
-  },[SetopenPop,Setloading])
+      setHidePopup(false);
+      setLoading()
+  },[setHidePopup,setLoading])
     // fetching the post comments from firebase database
     useEffect(() => {
       SetisLoading(true);
@@ -111,5 +110,8 @@ function PostComments({params,match}) {
         </div>
     )
 }
-
-export default withRouter(PostComments);
+const mapDispatchToProps = dispatch => ({
+  setLoading : () => dispatch(setLoading()),
+  setHidePopup : userCond => dispatch(setHidePopup(userCond))
+})
+export default withRouter(connect(null,mapDispatchToProps)(PostComments));

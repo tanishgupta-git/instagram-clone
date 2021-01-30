@@ -1,23 +1,22 @@
-import React,{useEffect, useState,useContext} from 'react';
+import React,{useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import {Link,withRouter} from 'react-router-dom';
 import './Profile.css';
 import {db} from '../../firebase/Firebase';
 import  Spinner from '../Spinner/Spinner';
-import { LoadingContext } from '../../contexts/loadingContext';
-import { PopUpContext } from '../../contexts/PopUpContext';
 import { createStructuredSelector } from 'reselect';
+import { setLoading } from '../../redux/loading/loading.actions.js';
 import { userSelector } from '../../redux/user/user.selectors';
+import { setHidePopup } from '../../redux/hidePopup/hidePopup.actions.js';
 
-function Profile({match,history,user}) {
+function Profile({setLoading,setHidePopup,match,history,user}) {
     const [userData,SetuserData] = useState({});
     const [isLoading,SetisLoading] = useState(true);
-    const {Setloading} = useContext(LoadingContext);
-    const {SetopenPop} = useContext(PopUpContext);
+
     useEffect(() => {
-        SetopenPop(false);
-        Setloading(false);
-    },[SetopenPop,Setloading])
+      setHidePopup (false);
+        setLoading();
+    },[setHidePopup ,setLoading])
     
     useEffect(() => {
       SetisLoading(true);
@@ -58,4 +57,9 @@ const mapStateToProps = createStructuredSelector({
   user : userSelector
 })
 
-export default withRouter(connect(mapStateToProps)(Profile));
+const mapDispatchToProps = dispatch => ({
+  setLoading : () => dispatch(setLoading()),
+  setHidePopup : userCond => dispatch(setHidePopup(userCond))
+})
+
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Profile));

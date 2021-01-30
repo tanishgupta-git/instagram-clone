@@ -1,4 +1,5 @@
-import React,{useState,useContext} from 'react'
+import React,{useState} from 'react';
+import { connect } from 'react-redux';
 import Header from '../Header/Header'
 import Posts from '../Posts/Posts';
 import { Switch,Route } from 'react-router-dom';
@@ -9,10 +10,10 @@ import AddPost from '../AddPost/AddPost';
 import PostComments from '../PostComments/PostComments';
 import './HomePage.css';
 import Loading from '../../static/Loading.gif';
-import {LoadingContext} from '../../contexts/loadingContext';
+import { createStructuredSelector } from 'reselect';
+import { loadingSelector } from '../../redux/loading/loading.selectors';
 
-function HomePage() {
-    const {loading} = useContext(LoadingContext)
+function HomePage({loading}) {
     const [homeClick,SethomeClick] = useState(false);
     const [chatsClick,SetchatsClick] = useState(false);
 
@@ -32,4 +33,7 @@ function HomePage() {
     )
 }
 
-export default HomePage;
+const mapStateToProps = createStructuredSelector({
+    loading : loadingSelector
+})
+export default connect(mapStateToProps)(HomePage);

@@ -1,28 +1,26 @@
-import React,{useState,useEffect,useRef,useContext} from 'react';
+import React,{useState,useEffect,useRef} from 'react';
 import { connect } from 'react-redux';
 import { db } from '../../firebase/Firebase';
 import { BsChat } from "react-icons/bs";
 import './ChatRoom.css';
 import Spinner from '../Spinner/Spinner';
-import { LoadingContext } from '../../contexts/loadingContext';
-import { PopUpContext } from '../../contexts/PopUpContext';
 import Chat from '../Chat/Chat';
 import Chatform from '../Chatform/Chatform';
 import { createStructuredSelector } from 'reselect';
+import { setLoading } from '../../redux/loading/loading.actions.js';
 import { userSelector } from '../../redux/user/user.selectors';
+import { setHidePopup } from '../../redux/hidePopup/hidePopup.actions.js';
 
-function ChatRoom({user,SetchatsClick}) {
+function ChatRoom({setLoading,setHidePopup,user,SetchatsClick}) {
     const [chats,Setchats] = useState([]);
     const [lastfetch,Setlastfetch] = useState();
     const [isLoading,SetisLoading] = useState(false);
-    const {Setloading} = useContext(LoadingContext);
-    const {SetopenPop} = useContext(PopUpContext);
 
     const refreDiv = useRef();
     useEffect(() => {
-        SetopenPop(false);
-        Setloading(false);
-    },[SetopenPop,Setloading])
+        setHidePopup(false);
+        setLoading();
+    },[setHidePopup,setLoading])
     useEffect(() => {
        SetchatsClick(true);
        return () => SetchatsClick(false);
@@ -86,4 +84,10 @@ function ChatRoom({user,SetchatsClick}) {
 const mapStateToProps = createStructuredSelector({
     user : userSelector
   })
-export default connect(mapStateToProps)(ChatRoom);
+
+  const mapDispatchToProps = dispatch => ({
+    setLoading : () => dispatch(setLoading()),
+    setHidePopup : userCond => dispatch(setHidePopup(userCond))
+  })
+
+export default connect(mapStateToProps,mapDispatchToProps)(ChatRoom);

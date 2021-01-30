@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React from 'react';
 import  { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './Header.css';
@@ -6,12 +6,12 @@ import Avatar from '@material-ui/core/Avatar';
 import { auth } from '../../firebase/Firebase';
 import { FaRegUserCircle} from "react-icons/fa";
 import { RiHome2Line,RiHome2Fill,RiAddCircleLine,RiSendPlaneFill,RiSendPlaneLine } from "react-icons/ri";
-import { PopUpContext } from '../../contexts/PopUpContext';
 import { createStructuredSelector } from 'reselect';
 import { userSelector } from '../../redux/user/user.selectors';
+import { hidePopupSelector } from '../../redux/hidePopup/hidePopup.selectors';
+import { setHidePopup } from '../../redux/hidePopup/hidePopup.actions.js';
 
-function Header({user,chatsClick,homeClick}) {
-  const {openPop,SetopenPop} = useContext(PopUpContext);
+function Header({hidePopup,setHidePopup,user,chatsClick,homeClick}) {
     return (
         <div className='header'>
           <div className='header__main'>
@@ -21,9 +21,9 @@ function Header({user,chatsClick,homeClick}) {
               <Link to='/chats'>{ chatsClick ? <RiSendPlaneFill className='header__popupParentIcon' /> 
               : <RiSendPlaneLine className='header__popupParentIcon'/>} </Link>
 
-              <span className={openPop ?  'header__avatarContainer header__avatarContainerClick' :'header__avatarContainer' } onClick={ 
-                () => SetopenPop( prev => !prev)}><Avatar className='header__avatarContainer__avatar' alt={user.username} src={user.imageUrl === "" ? " " : user.imageUrl}/> </span>
-              { openPop && <div className='header__popup'>
+              <span className={hidePopup ?  'header__avatarContainer header__avatarContainerClick' :'header__avatarContainer' } onClick={ 
+                () => setHidePopup(!hidePopup)}><Avatar className='header__avatarContainer__avatar' alt={user.username} src={user.imageUrl === "" ? " " : user.imageUrl}/> </span>
+              { hidePopup && <div className='header__popup'>
               <Link to={`/profile/${user.username}/${user.uid}`} ><FaRegUserCircle className='header__popupIcon'/> My Profile</Link>
               <Link to='/addpost'><RiAddCircleLine className='header__popupIcon' /> Add New Post</Link>
               <span className='header__logout' onClick={() => auth.signOut()}>Logout</span>
@@ -35,6 +35,11 @@ function Header({user,chatsClick,homeClick}) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  user : userSelector
+  user : userSelector,
+  hidePopup :hidePopupSelector 
 })
-export default connect(mapStateToProps)(Header);
+
+const mapDispatchToProps = dispatch => ({
+  setHidePopup : userCond => dispatch(setHidePopup(userCond))
+})
+export default connect(mapStateToProps,mapDispatchToProps)(Header)

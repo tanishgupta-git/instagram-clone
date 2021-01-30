@@ -3,8 +3,6 @@ import { auth, createUserProfileDocument } from './firebase/Firebase';
 import { connect } from 'react-redux';
 import SignInAndSignUp from './components/SignInAndSignUp/SignInAndSignUp';
 import HomePage from './components/HomePage/HomePage';
-import LoadingContextProvider from './contexts/loadingContext';
-import PopUpContextProvider from './contexts/PopUpContext';
 import { setUser } from './redux/user/user.actions';
 import { createStructuredSelector } from 'reselect';
 import { userSelector } from './redux/user/user.selectors';
@@ -39,14 +37,7 @@ function App({user,setUser}) {
   return (
     <div className="app">
     {
-       user ? 
-    <PopUpContextProvider>
-      <LoadingContextProvider>
-          <HomePage />
-        </LoadingContextProvider> 
-         </PopUpContextProvider>
-    : 
-    <SignInAndSignUp /> 
+       user ? <HomePage />  :  <SignInAndSignUp /> 
     }      
     </div> 
   );

@@ -1,20 +1,20 @@
-import React,{useState,useEffect,useContext} from 'react';
+import React,{useState,useEffect} from 'react';
 import { connect } from 'react-redux';
 import {storage,db} from '../../firebase/Firebase';
 import {withRouter} from 'react-router-dom';
 import './EditProfile.css';
-import { LoadingContext } from '../../contexts/loadingContext';
-import { PopUpContext } from '../../contexts/PopUpContext';
 import { createStructuredSelector } from 'reselect';
+import { setLoading } from '../../redux/loading/loading.actions.js';
 import { userSelector } from '../../redux/user/user.selectors';
+import { setHidePopup } from '../../redux/hidePopup/hidePopup.actions.js';
 
-function EditProfile({match,history,location,user}) {
-  const {Setloading} = useContext(LoadingContext);
-  const {SetopenPop} = useContext(PopUpContext);
+
+function EditProfile({setLoading,setHidePopup,match,history,location,user}) {
+
   useEffect(() => {
-    SetopenPop(false);
-    Setloading(false);
-},[SetopenPop,Setloading])
+    setHidePopup(false);
+    setLoading();
+},[setHidePopup,setLoading])
     const userData = location.userData;
     const types = ['image/png','image/jpeg','image/jpg'];
     const [error,Seterror] = useState(null);
@@ -147,5 +147,9 @@ function EditProfile({match,history,location,user}) {
 const mapStateToProps = createStructuredSelector({
   user : userSelector
 })
+const mapDispatchToProps = dispatch => ({
+  setLoading : () => dispatch(setLoading()),
+  setHidePopup : userCond => dispatch(setHidePopup(userCond))
+})
 
-export default withRouter(connect(mapStateToProps)(EditProfile));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(EditProfile));

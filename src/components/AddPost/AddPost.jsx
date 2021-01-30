@@ -1,17 +1,17 @@
-import React,{useState,useEffect,useContext} from 'react';
+import React,{useState,useEffect} from 'react';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import {storage,db} from '../../firebase/Firebase';
 import { RiAddCircleLine } from "react-icons/ri"; 
 import { BsUpload } from "react-icons/bs";
 import {withRouter} from 'react-router-dom';
-import { LoadingContext } from '../../contexts/loadingContext';
-import { PopUpContext } from '../../contexts/PopUpContext';
 import './AddPost.css';
 import { createStructuredSelector } from 'reselect';
+import { setLoading } from '../../redux/loading/loading.actions.js';
 import { userSelector } from '../../redux/user/user.selectors';
+import { setHidePopup } from '../../redux/hidePopup/hidePopup.actions.js';
 
-function AddPost({history,user}) {
+function AddPost({setLoading,setHidePopup,history,user}) {
    const [caption,Setcaption]  = useState('');
    const [image,Setimage] = useState(null);
    const [error,Seterror] = useState(null);
@@ -19,8 +19,6 @@ function AddPost({history,user}) {
    const [progress,Setprogress] = useState(0);
    const [uploading,Setuploading] = useState(false);
    const types = ['image/png','image/jpeg','image/jpg'];
-   const {Setloading} = useContext(LoadingContext);
-   const {SetopenPop} = useContext(PopUpContext);
 
    const handleChange = (e) => {
     let selected = e.target.files[0];
@@ -34,9 +32,9 @@ function AddPost({history,user}) {
    }
 //    setting the popup to false
 useEffect(() => {
-    SetopenPop(false);
-    Setloading(false);
-},[SetopenPop,Setloading])
+    setHidePopup(false);
+    setLoading()
+},[setHidePopup,setLoading])
    useEffect(() => {
     let unsubscribe = db.collection('users').doc(user.uid).get().then( function(doc) {
      if (doc.exists) {
@@ -111,4 +109,10 @@ useEffect(() => {
 const mapStateToProps = createStructuredSelector({
     user : userSelector
   })
-export default withRouter(connect(mapStateToProps)(AddPost));
+
+  const mapDispatchToProps = dispatch => ({
+    setLoading : () => dispatch(setLoading()),
+    setHidePopup : userCond => dispatch(setHidePopup(userCond))
+  })
+
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(AddPost));

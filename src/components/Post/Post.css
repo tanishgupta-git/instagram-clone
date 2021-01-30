@@ -106,3 +106,9 @@ svg.post-liked{
     color: #6082a3;
     background-color: transparent;
 }
+/* styling for mobile devices */
+@media screen and (max-width:550px) {
+    .post {
+        margin: 0  0 10px 0;
+    }
+}

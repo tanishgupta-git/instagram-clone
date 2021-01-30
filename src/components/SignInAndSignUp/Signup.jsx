@@ -33,7 +33,7 @@ function Signup() {
         <input placeholder='Username' className='app__signInput' type='text' value={username} onChange={(e) => Setusername(e.target.value)} />      
         <input placeholder='Email' className='app__signInput' type='text' value={email} onChange={(e) => Setemail(e.target.value)} />
         <input placeholder='Password' className='app__signInput' type='password' value={password} onChange={(e) => Setpassword(e.target.value)} />
-        <button type='submit' onClick={signUp}>{loading ?<div className='SignSpinner'></div> :'Sign Up'}</button>
+        <button type='submit' onClick={signUp} disabled={loading} >{loading ?<div className='SignSpinner'></div> :'Sign Up'}</button>
         <p className='Sign__error'>{error}</p> 
       </form>
     </div>
