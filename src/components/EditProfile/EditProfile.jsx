@@ -7,6 +7,7 @@ import { createStructuredSelector } from 'reselect';
 import { setLoading } from '../../redux/loading/loading.actions.js';
 import { userSelector } from '../../redux/user/user.selectors';
 import { setHidePopup } from '../../redux/hidePopup/hidePopup.actions.js';
+import Spinner from '../Spinner/Spinner';
 
 
 function EditProfile({setLoading,setHidePopup,match,history,location,user}) {
@@ -15,16 +16,18 @@ function EditProfile({setLoading,setHidePopup,match,history,location,user}) {
     setHidePopup(false);
     setLoading();
 },[setHidePopup,setLoading])
-    const userData = location.userData;
+
+    const [isLoading,SetisLoading] = useState(true);
     const types = ['image/png','image/jpeg','image/jpg'];
     const [error,Seterror] = useState(null);
     const [imageUploading,SetimageUploading] = useState(false);
     const [progress,Setprogress] = useState(0);
-    const [name,Setname] = useState(userData.name);
-    const [bio,Setbio] = useState(userData.bio);
-    const [website,Setwebsite] = useState(userData.website);
-    const [profession,Setprofession] = useState(userData.profession);
-    const [email,Setemail] = useState(userData.email);
+    const [name,Setname] = useState("");
+    const [bio,Setbio] = useState("");
+    const [website,Setwebsite] = useState();
+    const [profession,Setprofession] = useState("");
+    const [email,Setemail] = useState("");
+    const [imageUrl,SetimageUrl] = useState("");
     const [updating,Setupdating] = useState(false);
 
     const handleChange = (e) => {
@@ -62,7 +65,7 @@ function EditProfile({setLoading,setHidePopup,match,history,location,user}) {
                 });
                 Setprogress(0);
                 SetimageUploading(false);
-                history.push(`/profile/${userData.username}/${match.params.userId}`)
+                history.push(`/profile/${match.params.username}/${match.params.userId}`)
             })
         }
       )
@@ -77,17 +80,36 @@ function EditProfile({setLoading,setHidePopup,match,history,location,user}) {
        website:website,
        profession:profession,
        email:email
-     }).then(() => history.push(`/profile/${userData.username}/${match.params.userId}`))
+     }).then(() => history.push(`/profile/${match.params.username}/${match.params.userId}`))
    }
+
+  //  getting user data 
+   useEffect(() => {
+    SetisLoading(true);
+  //    creating a user document in users collection if it doesn't exits it will initialize it 
+     db.collection('users').doc(match.params.userId).get().then(function(doc) {
+      if (doc.exists) {
+          Setname(doc.data().name);
+          Setbio(doc.data().bio);
+          Setemail(doc.data().email);
+          Setprofession(doc.data().profession);
+          SetimageUrl(doc.data().imageUrl);
+          Setwebsite(doc.data().website);
+          SetisLoading(false);  
+      }
+  }).catch(function(error) {
+      console.log("Error getting user:", error);
+  });
+  },[match.params.userId,match.params.username])
     return (
         <div className='editProfile'>
-
+      { isLoading ? <Spinner /> :
           <form className='editProfile__form' onSubmit={handleSubmit}>
           <h3 className='editProfile__form__heading'>Edit Profile</h3>
            <p className='editProfile__form__error'>{error}</p>
           <div className='editProfile__form__userInfo'>
            <div className='editProfile__form__userInfo__userimage'>
-          { !!location.userData.imageUrl ? <img src={location.userData.imageUrl} alt=""/> : <span>No Image Yet</span>}
+          { !!imageUrl ? <img src={imageUrl} alt=""/> : <span>No Image Yet</span>}
           </div>
           <div>
           <p className='editProfile__form__userInfo__username'>{match.params.username}</p>
@@ -139,7 +161,7 @@ function EditProfile({setLoading,setHidePopup,match,history,location,user}) {
           <p className='editProfile__form__mutedtext'>Give a proper email id so that people can contact with you if that want</p>
         
           <button className='editProfile__form__submit' type='submit'>{updating ? <div className='editProfile__form__submit__spinner'></div>:"Submit" }</button>
-          </form> 
+          </form> }
         </div>
     )
 }

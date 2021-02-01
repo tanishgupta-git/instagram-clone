@@ -38,7 +38,7 @@ function Profile({setLoading,setHidePopup,match,history,user}) {
           { !!userData.imageUrl ?<div className='myProfile__image'> <img src={userData.imageUrl} alt=""/></div>:<div className='myProfile__noimage'> No Image Yet</div>}
            <div className='myProfile__intro'>
               <p className='myProfile__intro__username'>{userData.username}</p>
-             { user.uid === match.params.userId ? <Link className='myProfile__intro__edit' to={{pathname:`${history.location.pathname}/edit`,userData:userData}}>Edit Profile</Link> : ""}
+             { user.uid === match.params.userId ? <Link className='myProfile__intro__edit' to={`${history.location.pathname}/edit`}>Edit Profile</Link> : ""}
               <p className='myProfile__intro__name'>{userData.name}</p>
               <p className='myProfile__intro__profession'>{userData.profession}</p>
               <p className='myProfile__intro__bio'>{userData.bio}</p>
