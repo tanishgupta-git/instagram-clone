@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useRef} from 'react';
+import React,{useEffect,useRef} from 'react';
 import { connect } from 'react-redux';
 import { db } from '../../firebase/Firebase';
 import { BsChat } from "react-icons/bs";
@@ -10,11 +10,11 @@ import { createStructuredSelector } from 'reselect';
 import { setLoading } from '../../redux/loading/loading.actions.js';
 import { userSelector } from '../../redux/user/user.selectors';
 import { setHidePopup } from '../../redux/hidePopup/hidePopup.actions.js';
+import { chatsSelector, isLoadingSelector, lastfetchSelector } from '../../redux/chats/chats.selectors';
+import { setChats,setisLoading,setlastFetch } from '../../redux/chats/chats.actions';
 
-function ChatRoom({setLoading,setHidePopup,user,SetchatsClick}) {
-    const [chats,Setchats] = useState([]);
-    const [lastfetch,Setlastfetch] = useState();
-    const [isLoading,SetisLoading] = useState(false);
+function ChatRoom({chats,setChats,lastFetch,setlastFetch,isLoading,setisLoading,setLoading,setHidePopup,user,SetchatsClick}) {
+
 
     const refreDiv = useRef();
     useEffect(() => {
@@ -31,35 +31,36 @@ function ChatRoom({setLoading,setHidePopup,user,SetchatsClick}) {
         let unsubscribe;
         // limiting total messages fetch when load
         unsubscribe = db.collection('chats').orderBy('timestamp','desc').limit(14).onSnapshot( snapshot => { 
-            Setchats(snapshot.docs.map( doc => ({
+            setChats(snapshot.docs.map( doc => ({
                 id:doc.id,
                 chat:doc.data()
             })
             ).reverse());
-            Setlastfetch(snapshot.docs[snapshot.docs.length -1]);
+            setlastFetch(snapshot.docs[snapshot.docs.length -1]);
             
             refreDiv.current.scrollTop = refreDiv.current.scrollHeight - refreDiv.current.clientHeight;
         })
           
         return ( () => unsubscribe())
-    },[])
+    },[setChats,setlastFetch])
     
     const handleScroll  = (e) => {
 
      if(e.target.scrollTop === 0) {
-         SetisLoading(true);
+         setisLoading(true);
      }
     }
-    useEffect(() => {
+    useEffect(
+        () => {
         if(!isLoading) return;
-        setTimeout ( () => db.collection('chats').orderBy('timestamp','desc').startAfter(lastfetch).limit(14).get().then(snapshot => {
-            if(snapshot.docs.length && lastfetch.id === snapshot.docs[snapshot.docs.length - 1].id) return snapshot;
-            Setchats(prevState => [...(snapshot.docs.map(doc => ({id:doc.id,chat:doc.data()}) ).reverse()),...prevState]);
+        db.collection('chats').orderBy('timestamp','desc').startAfter(lastFetch).limit(14).get().then(snapshot => {
+            if(snapshot.docs.length && lastFetch.id === snapshot.docs[snapshot.docs.length - 1].id) return snapshot;
+            setChats([...(snapshot.docs.map(doc => ({id:doc.id,chat:doc.data()}) ).reverse()),...chats]);
             return snapshot;
-        }).then( (snapshot) => {if(snapshot.docs.length && !(lastfetch.id === snapshot.docs[snapshot.docs.length - 1].id)) Setlastfetch(snapshot.docs[snapshot.docs.length - 1])})
-        .then(() => { SetisLoading(false)}),1500)
+        }).then( (snapshot) => {if(snapshot.docs.length && !(lastFetch.id === snapshot.docs[snapshot.docs.length - 1].id)) setlastFetch(snapshot.docs[snapshot.docs.length - 1])})
+        .then(() => { setisLoading(false)})
 
-    },[isLoading,lastfetch])
+    },[isLoading,setChats,lastFetch,setlastFetch,chats,setisLoading])
     return (
     <div className='chatsParent'>
         <div className='chats' ref={refreDiv} onScroll={handleScroll}>
@@ -82,12 +83,18 @@ function ChatRoom({setLoading,setHidePopup,user,SetchatsClick}) {
 }
 
 const mapStateToProps = createStructuredSelector({
-    user : userSelector
+    user : userSelector,
+    chats : chatsSelector,
+    lastFetch : lastfetchSelector,
+    isLoading : isLoadingSelector
   })
 
-  const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = dispatch => ({
     setLoading : () => dispatch(setLoading()),
-    setHidePopup : userCond => dispatch(setHidePopup(userCond))
+    setHidePopup : userCond => dispatch(setHidePopup(userCond)),
+    setChats : chats => dispatch(setChats(chats)),
+    setlastFetch : doc => dispatch(setlastFetch(doc)),
+    setisLoading : bolValue => dispatch(setisLoading(bolValue))
   })
 
 export default connect(mapStateToProps,mapDispatchToProps)(ChatRoom);
