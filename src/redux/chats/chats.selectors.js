@@ -8,7 +8,7 @@ export const chatsSelector = createSelector(
     (chats) => chats.chats  
 )
 
-export const lastfetchSelector = createSelector(
+export const lastFetchSelector = createSelector(
     [selectChats],
     (chats) => chats.lastFetch
 )

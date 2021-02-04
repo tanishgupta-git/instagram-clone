@@ -10,7 +10,7 @@ import { createStructuredSelector } from 'reselect';
 import { setLoading } from '../../redux/loading/loading.actions.js';
 import { userSelector } from '../../redux/user/user.selectors';
 import { setHidePopup } from '../../redux/hidePopup/hidePopup.actions.js';
-import { chatsSelector, isLoadingSelector, lastfetchSelector } from '../../redux/chats/chats.selectors';
+import { chatsSelector, isLoadingSelector, lastFetchSelector } from '../../redux/chats/chats.selectors';
 import { setChats,setisLoading,setlastFetch } from '../../redux/chats/chats.actions';
 
 function ChatRoom({chats,setChats,lastFetch,setlastFetch,isLoading,setisLoading,setLoading,setHidePopup,user,SetchatsClick}) {
@@ -85,7 +85,7 @@ function ChatRoom({chats,setChats,lastFetch,setlastFetch,isLoading,setisLoading,
 const mapStateToProps = createStructuredSelector({
     user : userSelector,
     chats : chatsSelector,
-    lastFetch : lastfetchSelector,
+    lastFetch : lastFetchSelector,
     isLoading : isLoadingSelector
   })
 

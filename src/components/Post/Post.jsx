@@ -22,8 +22,6 @@ function Post({user,postId,post}) {
     let unsubscribe;
     let unsubscribeLike;
 
-    if(postId){
-
       unsubscribe = db.collection("posts").doc(postId).collection("comments").orderBy('timestamp','desc')
       .onSnapshot( (snapshot) => {
         SetcommentsCount(snapshot.docs.length);
@@ -39,7 +37,6 @@ function Post({user,postId,post}) {
         Setlikes(snapshot.docs.length);
       }
       )
-    }
 
     return () => {
       unsubscribe();
