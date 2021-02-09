@@ -3,15 +3,15 @@ import  { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import Avatar from '@material-ui/core/Avatar';
-import { auth } from '../../firebase/Firebase';
 import { FaRegUserCircle} from "react-icons/fa";
 import { RiHome2Line,RiHome2Fill,RiAddCircleLine,RiSendPlaneFill,RiSendPlaneLine } from "react-icons/ri";
 import { createStructuredSelector } from 'reselect';
 import { userSelector } from '../../redux/user/user.selectors';
 import { hidePopupSelector } from '../../redux/hidePopup/hidePopup.selectors';
 import { setHidePopup } from '../../redux/hidePopup/hidePopup.actions.js';
+import { signOutStart } from '../../redux/user/user.actions.js';
 
-function Header({hidePopup,setHidePopup,user,chatsClick,homeClick}) {
+function Header({signOutStart,hidePopup,setHidePopup,user,chatsClick,homeClick}) {
     return (
         <div className='header'>
           <div className='header__main'>
@@ -26,7 +26,7 @@ function Header({hidePopup,setHidePopup,user,chatsClick,homeClick}) {
               { hidePopup && <div className='header__popup'>
               <Link to={`/profile/${user.username}/${user.uid}`} ><FaRegUserCircle className='header__popupIcon'/> My Profile</Link>
               <Link to='/addpost'><RiAddCircleLine className='header__popupIcon' /> Add New Post</Link>
-              <span className='header__logout' onClick={() => auth.signOut()}>Logout</span>
+              <span className='header__logout' onClick={() => signOutStart()}>Logout</span>
               </div> }
               </span>
           </div>
@@ -40,6 +40,7 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setHidePopup : userCond => dispatch(setHidePopup(userCond))
+  setHidePopup : userCond => dispatch(setHidePopup(userCond)),
+  signOutStart : () => dispatch(signOutStart())
 })
 export default connect(mapStateToProps,mapDispatchToProps)(Header)

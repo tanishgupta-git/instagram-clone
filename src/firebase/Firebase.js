@@ -37,6 +37,15 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     return userRef;
  }
  
+ export const getCurrentUser = () => {
+    return new Promise((resolve,reject) => {
+       const unsubscribe = auth.onAuthStateChanged(userAuth => {
+          unsubscribe();
+          resolve(userAuth);
+       },reject)
+    })
+ }
+
 const db = firebaseApp.firestore();
 const auth = firebase.auth();
 const storage = firebase.storage();

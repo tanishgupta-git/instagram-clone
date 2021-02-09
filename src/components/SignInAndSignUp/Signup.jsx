@@ -1,23 +1,18 @@
-import React,{useState} from 'react'
-import { auth} from '../../firebase/Firebase';
+import React,{useState} from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { loadingSelector,errorSelector} from '../../redux/user/user.selectors';
+import  { signUpStart } from '../../redux/user/user.actions';
 import './SignInAndSignUp.css';
 
-function Signup() {
-  const [username,Setusername] = useState("");
+function Signup({loading,error,signUpStart}) {
+    const [username,Setusername] = useState("");
     const [email,Setemail] = useState("");
     const [password,Setpassword] = useState("");
-    const [error,Seterror] = useState("");
-    const [loading,Setloading] = useState(false);
+
     const signUp = (event) => {
         event.preventDefault();
-        Setloading(true);
-        auth.createUserWithEmailAndPassword(email,password)
-        .then( (authUser) => {
-          authUser.user.updateProfile({
-            displayName:username
-          })
-        })
-        .catch( (error) => { Seterror(error.message);Setloading(false) })
+        signUpStart({email,password,username});
        } 
      
     return (
@@ -34,7 +29,7 @@ function Signup() {
         <input placeholder='Email' className='app__signInput' type='text' value={email} onChange={(e) => Setemail(e.target.value)} />
         <input placeholder='Password' className='app__signInput' type='password' value={password} onChange={(e) => Setpassword(e.target.value)} />
         <button type='submit' onClick={signUp} disabled={loading} >{loading ?<div className='SignSpinner'></div> :'Sign Up'}</button>
-        <p className='Sign__error'>{error}</p> 
+        <p className='Sign__error'>{error.message}</p> 
       </form>
     </div>
       {/* end of sign up model */}
@@ -43,4 +38,12 @@ function Signup() {
     )
 }
 
-export default Signup;  
+const mapStateToProps = createStructuredSelector({
+  loading : loadingSelector,
+  error : errorSelector
+})
+const mapDispatchToProps = dispatch => ({
+  signUpStart : (userData) => dispatch(signUpStart(userData))
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Signup);  

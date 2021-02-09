@@ -50,7 +50,7 @@ function Posts({setLoading,setHidePopup,SethomeClick}) {
  
 
     function isScrolling() {
-      if(document.documentElement.offsetHeight + document.documentElement.scrollTop > document.documentElement.scrollHeight - 3 ) {  
+      if((document.documentElement.offsetHeight + document.documentElement.scrollTop) >= document.documentElement.scrollHeight - 3 ) {  
          SetpostsLoading(true);
       }
     }
