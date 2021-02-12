@@ -23,8 +23,13 @@ function AddPost({setLoading,setHidePopup,history,user}) {
    const handleChange = (e) => {
     let selected = e.target.files[0];
     if(selected && types.includes(selected.type)){
-         Setimage(selected);
-         Seterror('');
+         if((selected.size / 1000000) > 2) {
+            Setimage(null);
+            Seterror('Image file should be less than 2MB'); 
+            return;  
+        }
+        Setimage(selected);
+        Seterror('');
     }else{
         Setimage(null);
        Seterror('Please select an image of type png,jpeg,jpg'); 
@@ -45,7 +50,7 @@ useEffect(() => {
      return () => unsubscribe();
   }) },[user.uid])
    const handleUpload = () => {
-       if(!image) {
+       if(!image ) {
            Seterror("All Fields Are Required");
            return;
        }

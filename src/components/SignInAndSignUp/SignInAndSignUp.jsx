@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
-import Signup from './Signup';
-import Signin from './Signin';
+import Signup from '../SignUp/Signup';
+import Signin from '../SignIn/Signin';
 import './SignInAndSignUp.css';
 import SignSvg from '../../static/loginsvg.svg';
 
