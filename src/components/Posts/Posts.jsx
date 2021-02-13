@@ -43,14 +43,14 @@ function Posts({setLoading,setHidePopup,SethomeClick}) {
 
     // adding the scrolling event
     useEffect( () => {
-      window.addEventListener("scroll",isScrolling);
+      window.addEventListener("scroll",isScrolling,true);
       SetnoPosts(false);
       return () => window.removeEventListener("scroll",isScrolling);
     },[])
  
 
     function isScrolling() {
-      if((document.documentElement.offsetHeight + document.documentElement.scrollTop) >= document.documentElement.scrollHeight - 3 ) {  
+      if(((document.documentElement.offsetHeight - 100 )>= document.documentElement.scrollTop) / document.documentElement.scrollHeight === 0) {  
          SetpostsLoading(true);
       }
     }
