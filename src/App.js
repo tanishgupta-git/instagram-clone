@@ -1,12 +1,13 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,lazy,Suspense} from 'react';
 import { connect } from 'react-redux';
-import SignInAndSignUp from './components/SignInAndSignUp/SignInAndSignUp';
-import HomePage from './components/HomePage/HomePage';
 import { checkUserSession  } from './redux/user/user.actions';
 import { createStructuredSelector } from 'reselect';
 import { userSelector } from './redux/user/user.selectors';
+import Spinner from './components/Spinner/Spinner';
 
-function App({user,checkUserSession}) {
+const HomePage = lazy(() => import('./components/HomePage/HomePage'))
+const SignInAndSignUp = lazy(() => import('./components/SignInAndSignUp/SignInAndSignUp'))
+const  App = ({user,checkUserSession}) => {
   
   //  fetching the user from firebase
   useEffect( () => {  
@@ -17,7 +18,10 @@ function App({user,checkUserSession}) {
   return (
     <div className="app">
     {
-       user ? <HomePage />  :  <SignInAndSignUp /> 
+       user ? 
+       <Suspense fallback={<Spinner centerPage/>}><HomePage /> </Suspense> 
+        :  
+        <Suspense fallback={<Spinner  centerPage/>}><SignInAndSignUp /></Suspense>
     }      
     </div> 
   );

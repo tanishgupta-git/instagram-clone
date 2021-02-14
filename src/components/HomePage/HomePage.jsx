@@ -1,17 +1,18 @@
-import React,{useState} from 'react';
+import React,{useState,lazy,Suspense} from 'react';
 import { connect } from 'react-redux';
 import Header from '../Header/Header'
-import Posts from '../Posts/Posts';
 import { Switch,Route } from 'react-router-dom';
-import Profile from '../Profile/Profile';
-import EditProfile from '../EditProfile/EditProfile';
-import ChatRoom from '../ChatRoom/ChatRoom';
-import AddPost from '../AddPost/AddPost';
-import PostComments from '../PostComments/PostComments';
 import './HomePage.css';
-import Loading from '../../static/Loading.gif';
 import { createStructuredSelector } from 'reselect';
 import { loadingSelector } from '../../redux/loading/loading.selectors';
+import Spinner from '../Spinner/Spinner';
+
+const Posts = lazy(() => import('../Posts/Posts'));
+const Profile = lazy(() => import('../Profile/Profile'));
+const EditProfile = lazy(() => import('../EditProfile/EditProfile'));
+const ChatRoom = lazy(() => import('../ChatRoom/ChatRoom'));
+const AddPost = lazy(() => import('../AddPost/AddPost'));
+const PostComments = lazy(() => import('../PostComments/PostComments'));
 
 function HomePage({loading}) {
     const [homeClick,SethomeClick] = useState(false);
@@ -19,15 +20,17 @@ function HomePage({loading}) {
 
     return ( 
             <div className='HomePage'>
-            {loading && <div className='loading'><img src={Loading} alt=''/></div>}
+            {loading && <div className='loading'><Spinner centerPage /></div>}
             <Header homeClick={homeClick} chatsClick={chatsClick}/>
             <Switch>
+            <Suspense fallback={ <Spinner centerPage/>}>
             <Route exact path='/' render= { () => <Posts  SethomeClick={SethomeClick} /> } />
             <Route exact path='/profile/:username/:userId' render={() => <Profile /> } />
             <Route exact path='/profile/:username/:userId/edit' render={() => <EditProfile /> } />
             <Route exact path='/chats' render={ () => <ChatRoom SetchatsClick={SetchatsClick} /> } />
             <Route exact path='/p/:postId' render={ () => <PostComments /> } />
             <Route exact path='/addpost' render={ () => <AddPost />} />
+            </Suspense>
             </Switch>
             </div>
     )
