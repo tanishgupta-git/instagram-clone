@@ -16,7 +16,7 @@ function SignInAndSignUp() {
         </div>
     <div className='SignInSignUp__right'> 
     { openSignUp ? 
-      ( <Signup />) : (<Signin SetopenSignup={SetopenSignup} />) }
+      ( <Signup SetopenSignup={SetopenSignup} />) : (<Signin SetopenSignup={SetopenSignup} />) }
       </div> 
       </div>
     <div className='SignInSignUp__fotter'>

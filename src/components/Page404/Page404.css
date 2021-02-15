@@ -1,0 +1,11 @@
+.Page404{
+    width: 100%;
+    height:100%;
+    display: flex;
+    max-width: 1000px;
+    margin: 20px auto 0 auto;
+}
+
+.Page404__img img{
+    width: 400px;
+}

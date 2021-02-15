@@ -82,8 +82,8 @@
     display: flex;
     justify-content: center;
 }
-.Sign__form button:hover {
-  opacity: 0.7;
+.disabled {
+ opacity: 0.3;
 }
 .Sign__error {
     color: red;

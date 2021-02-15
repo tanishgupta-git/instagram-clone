@@ -22,10 +22,10 @@ function Signin({loading,error,signInStart,SetopenSignup}) {
         </center>    
         <input placeholder='Email' className='app__signInput' type='text' value={email} onChange={(e) => Setemail(e.target.value)} />
         <input placeholder='Password' className='app__signInput' type='password' value={password} onChange={(e) => Setpassword(e.target.value)} />
-        <button type='submit' onClick={signIn} disabled={loading}>{loading ? <div className='SignSpinner'></div>:'Log In'}</button>
+        <button type='submit' onClick={signIn} className={!(email && password) ? "disabled":""} disabled={!(email && password)}>{loading ? <div className='SignSpinner'></div>:'Log In'}</button>
         <p className='Sign__error'>{error.message}</p> 
       </form>
-      <p>Don't have an account? <span style={{ color:'blue',cursor:'pointer'}} onClick={ () => SetopenSignup(true)}>Sign up!</span></p>
+      <p>Don't have an account? <span style={{ color:'blue',cursor:'pointer'}} onClick={ () => SetopenSignup(true)}>Sign up</span></p>
     </div>
       {/* end of login model */}  
         </div>
