@@ -6,7 +6,6 @@ import './HomePage.css';
 import { createStructuredSelector } from 'reselect';
 import { loadingSelector } from '../../redux/loading/loading.selectors';
 import Spinner from '../Spinner/Spinner';
-import { errorSelector } from '../../redux/user/user.selectors';
 
 const Posts = lazy(() => import('../Posts/Posts'));
 const Profile = lazy(() => import('../Profile/Profile'));
@@ -19,7 +18,6 @@ const Page404 = lazy(() => import('../Page404/Page404'));
 function HomePage({loading}) {
     const [homeClick,SethomeClick] = useState(false);
     const [chatsClick,SetchatsClick] = useState(false);
-    throw Error;
     return ( 
             <div className='HomePage'>
             {loading && <div className='loading'><Spinner centerPage /></div>}
