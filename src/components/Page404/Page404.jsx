@@ -18,9 +18,8 @@ const Page404 =({setHidePopup,setLoading}) => {
            <img src={PageNotFound} alt=""/>
         </div>
         <div className='Page404__text'>
-             <h1>Oops!!!</h1>
-            <h3>We Couldn't find the page you are looking for</h3> 
-            <Link className='Page404__text' to='/'>Go Back To Home</Link>
+             <h1>We Couldn't find the page you are looking for</h1> 
+            <Link className='Page404__text__button' to='/'>Go Back To Home</Link>
         </div>
         </div>
     )

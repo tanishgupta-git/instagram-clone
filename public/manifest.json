@@ -13,9 +13,9 @@
       "sizes": "192x192"
     },
     {
-      "src": "instaclone-256x256.png",
+      "src": "instaclone-512x512.png",
       "type": "image/png",
-      "sizes": "256x256"
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
