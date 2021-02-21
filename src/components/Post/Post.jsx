@@ -46,7 +46,7 @@ function Post({user,postId,post}) {
 
   // fetching the post user imageUrl
   useEffect(() => {
-    db.collection('users').doc(post.userId).onSnapshot(function(doc) {
+    db.collection('users').doc(post.userId).get().then(function(doc) {
       SetpostUserImage(doc.data().imageUrl);
   })
   })

@@ -20,7 +20,7 @@ function Posts({setLoading,setHidePopup,SethomeClick}) {
       //   fetching the post from firebase
       useEffect(() => {
         // runs every time when post changes
-        let unsubscribe=  db.collection('posts').orderBy('timeStamp','desc').limit(3).onSnapshot( snapshot => {
+      db.collection('posts').orderBy('timeStamp','desc').limit(3).get().then( snapshot => {
           Setposts(snapshot.docs.map(doc => ({
             id:doc.id,
             post:doc.data()
@@ -28,7 +28,7 @@ function Posts({setLoading,setHidePopup,SethomeClick}) {
          SetlastPostfetch(snapshot.docs[snapshot.docs.length - 1]);
          setLoading();
         })
-        return () => unsubscribe();
+      
       },[setLoading])
 
     // setting the popup to false
