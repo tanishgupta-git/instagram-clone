@@ -58,10 +58,18 @@ function Posts({setLoading,setHidePopup,SethomeClick}) {
     // fetching the posts when scrollbar reached at the bottom
     useEffect(() => {
 
-      if(!postsLoading) return;
-      setTimeout(() => { if(lastPostfetch) {db.collection('posts').orderBy('timeStamp','desc').startAfter(lastPostfetch).limit(3).get().then( snapshot => {
+    if(!postsLoading) return;
+    if(lastPostfetch) 
+    {
+    db.collection('posts')
+    .orderBy('timeStamp','desc')
+    .startAfter(lastPostfetch)
+    .limit(3)
+    .get()
+    .then( snapshot => {
         if(!snapshot.docs.length) return snapshot;
         if( lastPostfetch.id === snapshot.docs[snapshot.docs.length - 1].id) return snapshot;
+        SetlastPostfetch(snapshot.docs[snapshot.docs.length -1 ]);
         Setposts( prevState => [...prevState,...(snapshot.docs.map( doc => ({
           id:doc.id,
           post:doc.data()
@@ -71,10 +79,12 @@ function Posts({setLoading,setHidePopup,SethomeClick}) {
       .then((snapshot) => {
         if(!snapshot.docs.length){ 
           SetnoPosts(true);
+          SetlastPostfetch(null);
           return;
         }
-       if(!(lastPostfetch.id === snapshot.docs[snapshot.docs.length - 1].id))  SetlastPostfetch(snapshot.docs[snapshot.docs.length -1 ]) })
-      .then( () => SetpostsLoading(false))}},1500);
+      })
+      .then( () => SetpostsLoading(false))
+    }
     },[postsLoading,lastPostfetch])
 
     return (
