@@ -2,14 +2,14 @@ import firebase from 'firebase';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseApp = firebase.initializeApp({
-    apiKey: "AIzaSyBqbJZQNvOB2j2B_mbDIpcYgo0snAhv4Ik",
-    authDomain: "instagram-clone-4ed61.firebaseapp.com",
-    databaseURL: "https://instagram-clone-4ed61.firebaseio.com",
-    projectId: "instagram-clone-4ed61",
-    storageBucket: "instagram-clone-4ed61.appspot.com",
-    messagingSenderId: "716263895264",
-    appId: "1:716263895264:web:64af3937215b478bb52085",
-    measurementId: "G-BF825X55LM"
+    apiKey: process.env.REACT_APP_apiKey,
+    authDomain: process.env.REACT_APP_authDomain,
+    databaseURL: process.env.REACT_APP_databaseURL,
+    projectId: process.env.REACT_APP_projectId,
+    storageBucket:process.env.REACT_APP_storageBucket,
+    messagingSenderId:process.env.REACT_APP_messagingSenderId,
+    appId:process.env.REACT_APP_appId,
+    measurementId:process.env.REACT_APP_measurementId
 })
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
