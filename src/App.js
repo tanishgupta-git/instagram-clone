@@ -12,23 +12,22 @@ const  App = ({user,checkUserSession}) => {
   
   //  fetching the user from firebase
   useEffect( () => {  
-    console.log(process.env);
    checkUserSession();
   },[checkUserSession]);
 
 
   return (
     <div className="app">
-    <ErrorBoundary>
-     <Suspense fallback={<Spinner centerPage/>}>
-    {
-       user ? 
-      <HomePage /> 
-        :  
-      <SignInAndSignUp />
-    }
-    </Suspense>   
-    </ErrorBoundary>   
+        <ErrorBoundary>
+            <Suspense fallback={<Spinner centerPage/>}>
+                {
+                  user ? 
+                  <HomePage /> 
+                    :  
+                  <SignInAndSignUp />
+                }
+            </Suspense>   
+        </ErrorBoundary>   
     </div> 
   );
 }

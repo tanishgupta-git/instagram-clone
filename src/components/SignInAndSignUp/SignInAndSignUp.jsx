@@ -11,7 +11,7 @@ function SignInAndSignUp() {
         <div className='SignInSignUp'>
     <div className='SignInSignUp__body'>
       <div className='SignInSignUp__left'>
-        <h1>Spreding happiness by creating</h1>
+        <h1>Spreading happiness by creating</h1>
         <img className='SignInSignUp__left_svg' src={SignSvg} alt=''/>
         </div>
     <div className='SignInSignUp__right'> 
